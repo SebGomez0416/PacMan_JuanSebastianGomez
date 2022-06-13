@@ -249,11 +249,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 130
-        y: 319
+        y: 320
         width: 14
-        height: 21
+        height: 19
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -261,6 +261,69 @@ TextureImporter:
       bones: []
       spriteID: b6c923784ac1c614fbfee3f6536cab4f
       internalID: -365725691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0x72_DungeonTilesetII_v1.4_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 373
+        width: 5
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7a8cb49030da204589056512a4e2e38
+      internalID: 1268825048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0x72_DungeonTilesetII_v1.4_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 336
+        width: 5
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1461e9bd5f5cf643a28690cf246de3d
+      internalID: 102676259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: 0x72_DungeonTilesetII_v1.4_8
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 368
+        width: 10
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02602651c1870b3479ba79c8e7d8177d
+      internalID: 1187346337
       vertices: []
       indices: 
       edges: []
@@ -279,8 +342,11 @@ TextureImporter:
       0x72_DungeonTilesetII_v1.4_1: -1173304529
       0x72_DungeonTilesetII_v1.4_3: 1398834649
       0x72_DungeonTilesetII_v1.4_5: -365725691
+      0x72_DungeonTilesetII_v1.4_8: 1187346337
       0x72_DungeonTilesetII_v1.4_0: 827228864
+      0x72_DungeonTilesetII_v1.4_7: 102676259
       0x72_DungeonTilesetII_v1.4_4: -1247252279
+      0x72_DungeonTilesetII_v1.4_6: 1268825048
       0x72_DungeonTilesetII_v1.4_2: -1636768532
   spritePackingTag: 
   pSDRemoveMatte: 0
