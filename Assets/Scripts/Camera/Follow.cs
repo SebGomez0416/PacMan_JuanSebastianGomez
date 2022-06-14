@@ -7,6 +7,7 @@ public class Follow : MonoBehaviour
     [SerializeField] Vector3 up;
     [SerializeField] Vector3 down;
     Vector3 init;
+    [SerializeField] float trigger;
 
     private void Awake()
     {
@@ -15,11 +16,17 @@ public class Follow : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(target.position.y > 2.5f) 
-        { transform.position = Vector3.Lerp(transform.position,up,Time.deltaTime*lerpTime); }
-        else if (target.position.y >=-2.5f && target.position.y <= 2.5f)
-        { transform.position = Vector3.Lerp(transform.position, init, Time.deltaTime * lerpTime); }
-        else if(target.position.y < -2.5f)
-        { transform.position = Vector3.Lerp(transform.position, down , Time.deltaTime * lerpTime); }
+        if(target.position.y > trigger) 
+        { 
+            transform.position = Vector3.Lerp(transform.position,up,Time.deltaTime*lerpTime);
+        }
+        else if (target.position.y >=-trigger && target.position.y <= trigger)
+        { 
+            transform.position = Vector3.Lerp(transform.position, init, Time.deltaTime * lerpTime);
+        }
+        else if(target.position.y < -trigger)
+        { 
+            transform.position = Vector3.Lerp(transform.position, down , Time.deltaTime * lerpTime);
+        }
     }
 }
