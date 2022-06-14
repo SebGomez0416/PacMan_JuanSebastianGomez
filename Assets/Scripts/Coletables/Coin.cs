@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour, ICollidable
 {
-    [SerializeField] int score;
+   [SerializeField] int score;
 
    public int GetScore()
     {        
