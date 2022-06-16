@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TileMapController : MonoBehaviour
 {
+    public enum Direction {Up,Down,Left,Right}
     [SerializeField] private int height;
     [SerializeField] private int width;
     [SerializeField] private SpriteRenderer ground;
@@ -17,7 +18,7 @@ public class TileMapController : MonoBehaviour
         tilemap = new Tile[height, width];
         CreateGrid();
     }
-
+    
     private void Spawn()
     {
         for (int i = 0; i < height; i++)
@@ -34,7 +35,6 @@ public class TileMapController : MonoBehaviour
             }
         }
     }
-    
     private void CreateGrid()
     {
         for (int i = 0; i < height; i++)
@@ -42,10 +42,51 @@ public class TileMapController : MonoBehaviour
             for (int j = 0; j < width; j++)
             {
                 tilemap[i, j] = map[id];
-                tilemap[i, j].ID = id;
+                tilemap[i, j].x = i;
+                tilemap[i, j].y = j;
                 id++;
             }
         }
+    }
+    public void CheckMove(Tile t, Direction direction)
+    { 
+        switch (direction)
+        {
+            case Direction.Up:
+                if (!Check(t.x-1,t.y)) return;
+                ChangeTail(t,tilemap[t.x-1 , t.y]);
+                break;
+            
+            case Direction.Down:
+                if (!Check(t.x+1,t.y)) return;
+                ChangeTail(t,tilemap[t.x+1 , t.y]);
+                break;
+            
+            case Direction.Left:
+                if (!Check(t.x,t.y-1)) return;
+                ChangeTail(t,tilemap[t.x , t.y-1]);
+                break;
+            
+            case Direction.Right:
+                if (!Check(t.x,t.y+1)) return;
+                ChangeTail(t,tilemap[t.x , t.y+1]);
+                break;
+        }
+    }
+
+    private void ChangeTail(Tile a, Tile b)
+    {
+        a.pos = b.pos;
+        a.wall = b.wall;
+        a.x = b.x;
+        a.y = b.y;
+    }
+    
+    private bool Check(int x, int y)
+    {
+        if (x < 0 || y < 0 || x == height || y == width)
+            return false;
+        else return !tilemap[x, y].wall;
     }
 
     
