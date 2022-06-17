@@ -1,13 +1,10 @@
 using UnityEngine;
 
-public class DeathEnemy : MonoBehaviour, ICollidable
+public class DeathEnemy : MonoBehaviour
 {
     [SerializeField] int score;
 
-    public int GetScore()
-    {
-        return score;
-    }
+   
 
     public void Destroy()
     {

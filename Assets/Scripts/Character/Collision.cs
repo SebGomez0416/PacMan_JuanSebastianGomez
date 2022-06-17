@@ -5,7 +5,7 @@ public class Collision : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D c)
     {
-        ICollidable obj = c.gameObject.GetComponent<ICollidable>();
+        ICollectible obj = c.gameObject.GetComponent<ICollectible>();
         obj?.Destroy();
 
         // llmar getscore cuando construya la UI

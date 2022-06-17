@@ -1,22 +1,30 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class TileMapController : MonoBehaviour
 {
     public enum Direction {Up,Down,Left,Right}
+    
     [SerializeField] private int height;
     [SerializeField] private int width;
+    
     [SerializeField] private SpriteRenderer ground;
+    
     private Tile[,] tilemap;
     [SerializeField] private List<Tile> map;
+    private List<Tile> groundMap;
+   
     private Vector3 position;
     private int id;
 
     private void Awake()
     {
+        groundMap = new List<Tile>();
         tilemap = new Tile[height, width];
         CreateGrid();
+        CreatedGroundMap();
     }
     
     private void Spawn()
@@ -48,6 +56,20 @@ public class TileMapController : MonoBehaviour
             }
         }
     }
+
+    private void CreatedGroundMap()
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if(!tilemap[i, j].wall)
+                   groundMap.Add(tilemap[i, j]); 
+                
+            }
+        }
+    }
+    
     public void CheckMove(Tile t, Direction direction)
     { 
         switch (direction)
@@ -74,6 +96,11 @@ public class TileMapController : MonoBehaviour
         }
     }
 
+    public void RandSpawnPoint(Tile t)
+    {
+        ChangeTail(t,groundMap[ Random.Range(0, groundMap.Count)]);
+    }
+
     private void ChangeTail(Tile a, Tile b)
     {
         a.pos = b.pos;
@@ -88,6 +115,8 @@ public class TileMapController : MonoBehaviour
             return false;
         else return !tilemap[x, y].wall;
     }
+    
+    
 
     
 }
