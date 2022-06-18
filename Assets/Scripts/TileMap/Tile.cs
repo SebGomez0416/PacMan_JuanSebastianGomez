@@ -4,7 +4,8 @@ public class Tile : MonoBehaviour
 {   
     public int x{ get; set;}
     public int y{ get; set;}
-    public Vector2 pos { get;  set; }
+    public Vector2 pos { get;  set; } 
+    public bool occupied { get; set;}
     public bool wall;
     private SpriteRenderer sr;
 

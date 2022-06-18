@@ -337,7 +337,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1591558614, guid: 21fa4abf12b12d44ab07549214fe4da8, type: 3}
       propertyPath: amount
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1591558614, guid: 21fa4abf12b12d44ab07549214fe4da8, type: 3}
       propertyPath: m_Enabled
@@ -422,9 +422,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2017224696, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
+      propertyPath: time
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017224696, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
+      propertyPath: lerpTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2017224696, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
+      propertyPath: speedChange
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2290744065084508348, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: m_Name
       value: character
+      objectReference: {fileID: 0}
+    - target: {fileID: 2526423066372010769, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7026059484420144859, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: tilemap
@@ -444,7 +460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8655479587244101850, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 8655479587244101850, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: m_LocalPosition.z

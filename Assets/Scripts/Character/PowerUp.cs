@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    [SerializeField] private float lerpTime;
+    private float lerpTime;
     [SerializeField] private float time;
+    [SerializeField] private float speedChange;
     private SpriteRenderer sr;
     private bool change;
+    
+    public static event Action EndPowerUp;
 
     private void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
     }
 
-    public void Active()
+    private void OnEnable()
+    {
+        Potion.ActivePowerUp += Active;
+    }
+
+    private void OnDisable()
+    {
+        Potion.ActivePowerUp -= Active;
+    }
+
+    private void Active()
     {
         StartCoroutine(Colors());
     }
@@ -22,13 +35,14 @@ public class PowerUp : MonoBehaviour
     IEnumerator Colors()
     {
         change = false;
-        lerpTime += 0.1f;
+        lerpTime += speedChange;
         Change();
-        yield return new WaitForSeconds(time);
-        if (lerpTime <= 1)
+        yield return new WaitForSeconds(speedChange);
+        if (lerpTime <= time)
             StartCoroutine("Colors");
         else
-        {
+        { 
+            EndPowerUp?.Invoke();
             lerpTime = 0;
             sr.color = Color.white;
         }

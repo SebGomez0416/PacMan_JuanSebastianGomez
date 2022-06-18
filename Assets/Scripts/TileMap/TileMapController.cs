@@ -14,17 +14,14 @@ public class TileMapController : MonoBehaviour
     
     private Tile[,] tilemap;
     [SerializeField] private List<Tile> map;
-    private List<Tile> groundMap;
-   
+
     private Vector3 position;
     private int id;
 
     private void Awake()
     {
-        groundMap = new List<Tile>();
         tilemap = new Tile[height, width];
         CreateGrid();
-        CreatedGroundMap();
     }
     
     private void Spawn()
@@ -55,21 +52,9 @@ public class TileMapController : MonoBehaviour
                 id++;
             }
         }
+        tilemap[0, 0].occupied = true;
     }
 
-    private void CreatedGroundMap()
-    {
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                if(!tilemap[i, j].wall)
-                   groundMap.Add(tilemap[i, j]); 
-                
-            }
-        }
-    }
-    
     public void CheckMove(Tile t, Direction direction)
     { 
         switch (direction)
@@ -98,7 +83,17 @@ public class TileMapController : MonoBehaviour
 
     public void RandSpawnPoint(Tile t)
     {
-        ChangeTail(t,groundMap[ Random.Range(0, groundMap.Count)]);
+        int randX;
+        int randY;
+
+        do
+        {
+            randX = Random.Range(0, height);
+            randY = Random.Range(0, width);
+            
+        } while (tilemap[randX,randY].occupied||tilemap[randX,randY].wall);
+
+        ChangeTail(t,tilemap[randX,randY]);
     }
 
     private void ChangeTail(Tile a, Tile b)
@@ -107,6 +102,8 @@ public class TileMapController : MonoBehaviour
         a.wall = b.wall;
         a.x = b.x;
         a.y = b.y;
+        tilemap[a.x, a.y].occupied = false;
+        tilemap[b.x, b.y].occupied = true;
     }
     
     private bool Check(int x, int y)

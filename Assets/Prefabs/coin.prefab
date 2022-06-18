@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8800717001246308732}
   - component: {fileID: 8959101578148526204}
-  - component: {fileID: 8150582340551711223}
   - component: {fileID: 5480481525253660609}
+  - component: {fileID: 3793250050753087837}
   m_Layer: 0
   m_Name: coin
   m_TagString: Untagged
@@ -86,7 +86,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &8150582340551711223
+--- !u!114 &5480481525253660609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124807478923998899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fece66037a831c845afdd8939d269591, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 0
+  tilemap: {fileID: 0}
+--- !u!61 &3793250050753087837
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,7 +110,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -112,15 +126,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2, y: 0.23333333}
   m_EdgeRadius: 0
---- !u!114 &5480481525253660609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124807478923998899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fece66037a831c845afdd8939d269591, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

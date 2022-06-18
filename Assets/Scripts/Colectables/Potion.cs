@@ -19,6 +19,7 @@ public class Potion : MonoBehaviour, ICollectible
     {
         sr.enabled = true;
         currentTile = gameObject.AddComponent<Tile>(); // preguntar sergio
+        currentTile.occupied = true;
         tilemap.RandSpawnPoint(currentTile);
         gameObject.transform.position = currentTile.pos;
     }

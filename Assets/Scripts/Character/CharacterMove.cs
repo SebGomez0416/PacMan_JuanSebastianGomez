@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class CharacterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
