@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
@@ -7,8 +6,8 @@ public class CharacterMove : MonoBehaviour
     private SpriteRenderer sr;
     
     [SerializeField] private float speed;
-    [SerializeField]private Tile currentTile;
     [SerializeField]private TileMapController tilemap;
+    private Tile currentTile;
     
     private void Awake()
     {
@@ -18,34 +17,35 @@ public class CharacterMove : MonoBehaviour
 
     private void Start()
     {
+        sr.enabled = true;
+        currentTile = gameObject.AddComponent<Tile>(); // preguntar sergio
+        currentTile.occupied = true;
+        tilemap.RandSpawnPoint(currentTile);
         rb.position = currentTile.pos;
     }
 
     private void Update()
     {
-        
+
         if (Input.GetKeyDown(KeyCode.W))
-            tilemap.CheckMove(currentTile, TileMapController.Direction.Up);
+            Movement(TileMapController.Direction.Up);
 
         if (Input.GetKeyDown(KeyCode.S))
-            tilemap.CheckMove(currentTile, TileMapController.Direction.Down);
+            Movement(TileMapController.Direction.Down);
 
         if (Input.GetKeyDown(KeyCode.A))
-            tilemap.CheckMove(currentTile, TileMapController.Direction.Left);
+            Movement(TileMapController.Direction.Left);
         
         if (Input.GetKeyDown(KeyCode.D))
-            tilemap.CheckMove(currentTile, TileMapController.Direction.Right);
+            Movement(TileMapController.Direction.Right);
     }
 
-    private void FixedUpdate()
+    private void Movement(TileMapController.Direction direction)
     {
-        Movement();
-    }
-
-    private void Movement()
-    {
-      // rb.position = Vector2.Lerp(rb.position,currentTile.pos,Time.fixedDeltaTime*speed);
-      rb.position = currentTile.pos;
+        tilemap.CheckMove(currentTile, direction);
+        rb.position = currentTile.pos;
+        
+        // rb.position = Vector2.Lerp(rb.position,currentTile.pos,Time.fixedDeltaTime*speed);
     }
 
    

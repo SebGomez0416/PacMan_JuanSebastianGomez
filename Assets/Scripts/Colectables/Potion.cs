@@ -1,12 +1,12 @@
 using System;
 using UnityEngine;
 
-public class Potion : MonoBehaviour, ICollectible
+public class Potion : MonoBehaviour, ISpawmer,IKillable
 {   
     [SerializeField]private int score;
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
-    private SpriteRenderer sr;
+    private SpriteRenderer sr; 
 
     public static event Action ActivePowerUp;
 
@@ -24,7 +24,7 @@ public class Potion : MonoBehaviour, ICollectible
         gameObject.transform.position = currentTile.pos;
     }
 
-    public void Destroy()
+    public void Death()
     {
         ActivePowerUp?.Invoke();
         gameObject.SetActive(false);

@@ -16,9 +16,10 @@ public class CharacterDeath : MonoBehaviour, IKillable
         PowerUp.EndPowerUp -= SetActive;
     }
 
-    public void Kill()
+    public void Death()
     {
-        Debug.Log("murio");
+        if (powerUp) return;
+        gameObject.SetActive(false);
     }
 
     private void SetActive()

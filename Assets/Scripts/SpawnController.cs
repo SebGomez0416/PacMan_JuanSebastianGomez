@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectibleController : MonoBehaviour
+public class SpawnController : MonoBehaviour
 {
      [SerializeField]private List<GameObject> collectibles;
      [SerializeField] private int amount;
@@ -20,7 +20,7 @@ public class CollectibleController : MonoBehaviour
                for (int i = 0; i < amount; i++)
                {
                     GameObject o = Instantiate(obj,transform);
-                    o.GetComponent<ICollectible>().Spawn();
+                    o.GetComponent<ISpawmer>().Spawn();
                }
           }
      }

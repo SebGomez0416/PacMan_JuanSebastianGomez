@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -52,33 +51,47 @@ public class TileMapController : MonoBehaviour
                 id++;
             }
         }
-        tilemap[0, 0].occupied = true;
     }
 
-    public void CheckMove(Tile t, Direction direction)
+    public bool CheckMove(Tile t, Direction direction)
     { 
         switch (direction)
         {
             case Direction.Up:
-                if (!Check(t.x-1,t.y)) return;
-                ChangeTail(t,tilemap[t.x-1 , t.y]);
+               
+                if (Check(t.x-1,t.y))
+                {               
+                    ChangeTail(t,tilemap[t.x-1 , t.y]);
+                    return true;
+                }                
                 break;
             
             case Direction.Down:
-                if (!Check(t.x+1,t.y)) return;
-                ChangeTail(t,tilemap[t.x+1 , t.y]);
+                if (Check(t.x+1,t.y))
+                {
+                    ChangeTail(t,tilemap[t.x+1 , t.y]);
+                    return true;
+                }                
                 break;
             
             case Direction.Left:
-                if (!Check(t.x,t.y-1)) return;
-                ChangeTail(t,tilemap[t.x , t.y-1]);
+                if (Check(t.x,t.y-1))
+                {                 
+                    ChangeTail(t,tilemap[t.x , t.y-1]);
+                    return true;
+                }                
                 break;
             
             case Direction.Right:
-                if (!Check(t.x,t.y+1)) return;
-                ChangeTail(t,tilemap[t.x , t.y+1]);
+                if (Check(t.x,t.y+1))
+                {                 
+                    ChangeTail(t,tilemap[t.x , t.y+1]);
+                    return true;
+                }                
                 break;
         }
+
+       return false;
     }
 
     public void RandSpawnPoint(Tile t)
@@ -107,7 +120,7 @@ public class TileMapController : MonoBehaviour
     }
     
     private bool Check(int x, int y)
-    {
+    {   
         if (x < 0 || y < 0 || x == height || y == width)
             return false;
         else return !tilemap[x, y].wall;

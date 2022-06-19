@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Coin : MonoBehaviour, ICollectible
+public class Coin : MonoBehaviour, ISpawmer,IKillable
 {
    [SerializeField] int score;
    [SerializeField]private TileMapController tilemap;
@@ -24,7 +24,7 @@ public class Coin : MonoBehaviour, ICollectible
       gameObject.transform.position = currentTile.pos;
    }
 
-   public void Destroy()
+   public void Death()
    {
       SendScore?.Invoke();
       gameObject.SetActive(false);
