@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
@@ -8,19 +9,42 @@ public class CharacterMove : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
-    
+    private bool gameOver;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        currentTile = gameObject.AddComponent<Tile>();
     }
 
-    public void Start()
+    private void Start()
     {
+        Spawn();
+    }
+    
+    private void OnEnable()
+    {
+        CharacterDeath.NotifyDeath += Spawn;
+        UI.SendGameOver += SetGameOver;
+    }
+
+    private void OnDisable()
+    {
+        CharacterDeath.NotifyDeath -= Spawn;
+        UI.SendGameOver -= SetGameOver;
+    }
+
+    private void Spawn()
+    { 
         sr.enabled = true;
-        currentTile = gameObject.AddComponent<Tile>(); // preguntar sergio
         tilemap.SpawnPoint(currentTile);
         rb.position = currentTile.pos;
+    }
+
+    private void SetGameOver()
+    {
+        gameOver = true;
     }
 
     private void Update()
@@ -41,6 +65,7 @@ public class CharacterMove : MonoBehaviour
 
     private void Movement(TileMapController.Direction direction)
     {
+        if (gameOver) return;
         tilemap.CheckMove(currentTile, direction);
         rb.position = currentTile.pos;
         

@@ -1,10 +1,11 @@
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-     [SerializeField]private List<GameObject> collectibles;
+     [SerializeField] private List<GameObject> objects;
 
      private void Start()
      {
@@ -13,13 +14,14 @@ public class SpawnController : MonoBehaviour
 
      private void Spawn()
      {
-          foreach (GameObject obj in collectibles)
+          foreach (GameObject obj in objects)
           {
                for (int i = 0; i < obj.GetComponent<ISpawmer>().Amount(); i++)
                {
-                    GameObject o = Instantiate(obj,transform);
+                    GameObject o = Instantiate(obj, transform);
                     o.GetComponent<ISpawmer>().Spawn();
                }
           }
      }
 }
+    

@@ -22,7 +22,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8655479587244101850
 Transform:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290744065084508348}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ab84708ab666b14aa1bd41e94b73f5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnData: {fileID: 11400000, guid: 7cfab23c811f9974aae68c122f709f95, type: 2}
+  SpawnData: {fileID: 11400000, guid: b7d4b5b391560144da0e74dab1918e6b, type: 2}
   speed: 3
-  tilemap: {fileID: 0}
+  tilemap: {fileID: 1703445834502936387, guid: 21fa4abf12b12d44ab07549214fe4da8, type: 3}
 --- !u!61 &2503220348813571877
 BoxCollider2D:
   m_ObjectHideFlags: 0
