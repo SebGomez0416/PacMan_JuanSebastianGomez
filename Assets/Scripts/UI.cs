@@ -2,21 +2,26 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textClock;
     [SerializeField] private TextMeshProUGUI textScore;
+    [SerializeField] private TextMeshProUGUI textWin;
     [SerializeField] private GameObject life;
+    [SerializeField] private GameObject screenGameOver;
     [SerializeField] private float offSet;
+    [SerializeField] private int scoreToWin;
+    
     private bool timerBool;
     private float currentTime;
     private TimeSpan timer;
     private int score;
     private int AmountLife;
     private GameObject[] lives;
-   
+
+    public static event Action SendGameOver;
 
     private void Awake()
     {
@@ -34,11 +39,13 @@ public class UI : MonoBehaviour
     private void OnEnable()
     {
         Coin.SendScore += UpdateScore;
+        CharacterDeath.NotifyDeath += UpdateLives;
     }
 
     private void OnDisable()
     {
         Coin.SendScore -= UpdateScore;
+        CharacterDeath.NotifyDeath -= UpdateLives;
     }
 
     private void InitTimer()
@@ -69,6 +76,26 @@ public class UI : MonoBehaviour
     {
         score += s;
         textScore.text = ""+score;
+        if (score == scoreToWin)
+        {
+            textWin.enabled = true;
+            GameOver();
+        }
+    }
+
+    private void UpdateLives()
+    {
+        AmountLife--;
+        lives[AmountLife].gameObject.SetActive(false);
+        if (AmountLife == 0)
+            GameOver();
+    }
+    
+    private void GameOver()
+    {
+        EndTime();
+        SendGameOver?.Invoke();
+        screenGameOver.SetActive(true);
     }
 
     private void  SpawnLives()
@@ -81,6 +108,15 @@ public class UI : MonoBehaviour
     }
 
    
+    public void ButtonMenu()
+    {
+        SceneManager.LoadScene("Menu");
+    }
+
+    public void ButtonExit()
+    {
+        Application.Quit();
+    }
    
 
 }
