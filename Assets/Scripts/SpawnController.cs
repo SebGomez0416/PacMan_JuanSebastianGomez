@@ -1,12 +1,10 @@
-using System;
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
      [SerializeField]private List<GameObject> collectibles;
-     [SerializeField] private int amount;
-    
 
      private void Start()
      {
@@ -17,7 +15,7 @@ public class SpawnController : MonoBehaviour
      {
           foreach (GameObject obj in collectibles)
           {
-               for (int i = 0; i < amount; i++)
+               for (int i = 0; i < obj.GetComponent<ISpawmer>().Amount(); i++)
                {
                     GameObject o = Instantiate(obj,transform);
                     o.GetComponent<ISpawmer>().Spawn();

@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public class Coin : MonoBehaviour, ISpawmer,IKillable
+public class Coin : MonoBehaviour, ISpawmer,ICollectable
 {
+   [SerializeField] private SpawnData SpawnData;
    [SerializeField] int score;
    [SerializeField]private TileMapController tilemap;
    private Tile currentTile;
@@ -18,13 +19,17 @@ public class Coin : MonoBehaviour, ISpawmer,IKillable
    public void Spawn()
    {
       sr.enabled = true;
-      currentTile = gameObject.AddComponent<Tile>(); 
-      currentTile.occupied = true;
-      tilemap.RandSpawnPoint(currentTile);
+      currentTile = gameObject.AddComponent<Tile>();
+      tilemap.RandSpawnObject(currentTile);
       gameObject.transform.position = currentTile.pos;
    }
+   
+   public int Amount()
+   {
+      return SpawnData.Amount;
+   }
 
-   public void Death()
+   public void GetObject()
    {
       SendScore?.Invoke();
       gameObject.SetActive(false);

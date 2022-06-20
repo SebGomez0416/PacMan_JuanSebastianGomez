@@ -4,7 +4,7 @@ public class CharacterMove : MonoBehaviour
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
-    
+
     [SerializeField] private float speed;
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
@@ -15,12 +15,11 @@ public class CharacterMove : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
+    public void Start()
     {
         sr.enabled = true;
         currentTile = gameObject.AddComponent<Tile>(); // preguntar sergio
-        currentTile.occupied = true;
-        tilemap.RandSpawnPoint(currentTile);
+        tilemap.SpawnPoint(currentTile);
         rb.position = currentTile.pos;
     }
 
@@ -49,6 +48,4 @@ public class CharacterMove : MonoBehaviour
     }
 
    
-
-    
 }

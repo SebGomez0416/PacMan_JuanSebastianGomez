@@ -17846,7 +17846,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1703445834502936388}
   - component: {fileID: 1703445834502936387}
-  - component: {fileID: 1591558614}
   m_Layer: 0
   m_Name: TileMap
   m_TagString: Untagged
@@ -19959,20 +19958,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &1591558614
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703445834502936386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 390c45304f5071e44a0117c519700112, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collectibles:
-  - {fileID: 2811832415361188814, guid: bab31eda1b0aebc4eb5b7ea212c17881, type: 3}
 --- !u!1 &1711986113733356838
 GameObject:
   m_ObjectHideFlags: 0

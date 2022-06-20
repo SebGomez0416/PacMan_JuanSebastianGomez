@@ -41,7 +41,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8124807478923998899}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fece66037a831c845afdd8939d269591, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SpawnData: {fileID: 11400000, guid: 84e9c406385b17948be196a1793e3c66, type: 2}
   score: 0
   tilemap: {fileID: 0}
 --- !u!61 &3793250050753087837

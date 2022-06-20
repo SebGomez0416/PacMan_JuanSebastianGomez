@@ -94,7 +94,7 @@ public class TileMapController : MonoBehaviour
        return false;
     }
 
-    public void RandSpawnPoint(Tile t)
+    public void RandSpawnObject(Tile t)
     {
         int randX;
         int randY;
@@ -107,16 +107,37 @@ public class TileMapController : MonoBehaviour
         } while (tilemap[randX,randY].occupied||tilemap[randX,randY].wall);
 
         ChangeTail(t,tilemap[randX,randY]);
+        tilemap[randX, randY].occupied = true;
+    }
+    
+    public void RandSpawnCharacters(Tile t)
+    {
+        int randX;
+        int randY;
+
+        do
+        {
+            randX = Random.Range(0, height);
+            randY = Random.Range(0, width);
+            
+        } while (tilemap[randX,randY].wall);
+
+        ChangeTail(t,tilemap[randX,randY]);
+        
     }
 
+    public void SpawnPoint(Tile t)
+    {
+        ChangeTail(t,tilemap[0,0]);
+        tilemap[0, 0].occupied = true;
+    }
+    
     private void ChangeTail(Tile a, Tile b)
     {
         a.pos = b.pos;
         a.wall = b.wall;
         a.x = b.x;
         a.y = b.y;
-        tilemap[a.x, a.y].occupied = false;
-        tilemap[b.x, b.y].occupied = true;
     }
     
     private bool Check(int x, int y)
