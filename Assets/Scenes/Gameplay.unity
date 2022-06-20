@@ -420,6 +420,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1194088179131473882, guid: f4baf66abaa96564f9dfd1a24e6fbaac, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1398149720937728882, guid: f4baf66abaa96564f9dfd1a24e6fbaac, type: 3}
       propertyPath: tilemap
       value: 
