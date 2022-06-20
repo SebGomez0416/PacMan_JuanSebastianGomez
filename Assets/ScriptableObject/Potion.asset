@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Potion
   m_EditorClassIdentifier: 
   amount: 6
+  name: Potion

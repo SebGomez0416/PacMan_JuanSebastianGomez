@@ -4,14 +4,29 @@ using Random = UnityEngine.Random;
 public class EnemyMove : MonoBehaviour,ISpawmer
 {
     [SerializeField] private SpawnData SpawnData;
-    [SerializeField]private int score;
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
+    private bool gameOver;
     
     private Rigidbody2D rb;
     private TileMapController.Direction _direction;
     [SerializeField] private float timeToMove;
     private float time;
+
+    private void OnEnable()
+    {
+        UI.SendGameOver += SetGameOver;
+    }
+
+    private void OnDisable()
+    {
+        UI.SendGameOver -= SetGameOver;
+    }
+    
+    private void SetGameOver()
+    {
+        gameOver = true;
+    }
 
     public void Spawn()
     {
@@ -36,6 +51,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
 
     private void Move()
     {
+        if (gameOver) return;
         time += 1 * Time.deltaTime;
 
         if (time >= timeToMove)

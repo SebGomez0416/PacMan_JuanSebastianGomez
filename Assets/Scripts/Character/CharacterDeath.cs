@@ -1,9 +1,22 @@
+using System;
 using UnityEngine;
 
 public class CharacterDeath : MonoBehaviour, IKillable
 {
     [SerializeField]private bool powerUp;
+    private SpriteRenderer sr;
+    private Rigidbody2D rb;
+    private Vector3 init;
     
+    public static event Action NotifyDeath;
+
+    private void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
+        init= new Vector3(0, 2.4f, 0);
+    }
+
     private void OnEnable()
     {
         Potion.ActivePowerUp += SetActive;
@@ -19,7 +32,9 @@ public class CharacterDeath : MonoBehaviour, IKillable
     public void Death()
     {
         if (powerUp) return;
-        gameObject.SetActive(false);
+        sr.enabled = false;
+        rb.position = init;
+        NotifyDeath?.Invoke();
     }
 
     private void SetActive()

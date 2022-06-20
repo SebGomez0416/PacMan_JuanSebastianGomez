@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 6
   m_Sprite: {fileID: 1104689087, guid: c6f8f4f5a92f0c14e870f075859435b2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -175,7 +175,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnData: {fileID: 11400000, guid: 9003121562e233d47831c619410f5ca5, type: 2}
-  score: 0
   tilemap: {fileID: 0}
   timeToMove: 1
-  time: 0
