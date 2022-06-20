@@ -4,7 +4,6 @@ using UnityEngine;
 public class Potion : MonoBehaviour, ISpawmer,ICollectable 
 {
     [SerializeField] private SpawnData SpawnData;
-    [SerializeField]private int score;
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
     private SpriteRenderer sr;

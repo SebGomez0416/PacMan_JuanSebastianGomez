@@ -9,7 +9,7 @@ public class Coin : MonoBehaviour, ISpawmer,ICollectable
    private Tile currentTile;
    private SpriteRenderer sr;
    
-   public static event Action SendScore;
+   public static event Action <int> SendScore;
 
    private void Awake()
    {
@@ -31,7 +31,7 @@ public class Coin : MonoBehaviour, ISpawmer,ICollectable
 
    public void GetObject()
    {
-      SendScore?.Invoke();
+      SendScore?.Invoke(score);
       gameObject.SetActive(false);
    }
 }

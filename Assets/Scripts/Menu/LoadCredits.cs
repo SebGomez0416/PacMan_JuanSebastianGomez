@@ -13,7 +13,8 @@ public class LoadCredits : MonoBehaviour
 
     private void LoadText()
     {
-        FileStream fs = File.OpenRead( "Assets/StreamingAssets/Credits.txt");
+        //https://docs.unity3d.com/Manual/StreamingAssets.html
+        FileStream fs = File.OpenRead( Application.streamingAssetsPath + "Credits.txt");
         StreamReader sr = new StreamReader(fs);
         credits.text = sr.ReadToEnd();
         
