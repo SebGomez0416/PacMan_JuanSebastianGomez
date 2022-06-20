@@ -2,20 +2,29 @@ using System;
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textClock;
     [SerializeField] private TextMeshProUGUI textScore;
+    [SerializeField] private GameObject life;
+    [SerializeField] private float offSet;
     private bool timerBool;
     private float currentTime;
     private TimeSpan timer;
     private int score;
+    private int AmountLife;
+    private GameObject[] lives;
+   
 
     private void Awake()
     {
         textClock.text = "00:00";
         timerBool = false;
+        AmountLife = 3;
+        lives = new GameObject[AmountLife];
+        SpawnLives();
     }
     private void Start()
     {
@@ -60,6 +69,15 @@ public class UI : MonoBehaviour
     {
         score += s;
         textScore.text = ""+score;
+    }
+
+    private void  SpawnLives()
+    {
+        for (int i = 0; i < lives.Length; i++)
+        {
+            lives[i]=Instantiate(life,transform);
+            lives[i].transform.position += new Vector3(offSet*i, 0, 0);
+        }
     }
 
    
