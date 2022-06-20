@@ -8,8 +8,7 @@ public class PowerUp : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private float speedChange;
     private SpriteRenderer sr;
-    private bool change;
-    
+
     public static event Action EndPowerUp;
 
     private void Awake()
@@ -34,7 +33,6 @@ public class PowerUp : MonoBehaviour
 
     IEnumerator Colors()
     {
-        change = false;
         lerpTime += speedChange;
         Change();
         yield return new WaitForSeconds(speedChange);
