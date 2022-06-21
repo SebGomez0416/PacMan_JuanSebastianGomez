@@ -1226,9 +1226,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textClock: {fileID: 2083273045}
   textScore: {fileID: 1673145048}
+  textWin: {fileID: 2123072712}
   life: {fileID: 6672821183821681528, guid: 1c99794af0dadfd4d984bbfa476ffb38, type: 3}
   screenGameOver: {fileID: 240761905}
   offSet: 45
+  scoreToWin: 20
 --- !u!1 &2000654598
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,7 +1681,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123072710}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 

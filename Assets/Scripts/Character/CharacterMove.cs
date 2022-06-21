@@ -20,7 +20,9 @@ public class CharacterMove : MonoBehaviour
 
     private void Start()
     {
-        Spawn();
+        sr.enabled = true;
+        tilemap.SpawnPoint(currentTile);
+        rb.position = currentTile.pos;
     }
     
     private void OnEnable()
@@ -37,6 +39,11 @@ public class CharacterMove : MonoBehaviour
 
     private void Spawn()
     { 
+        Invoke("ReSpawn",2);
+    }
+
+    private void ReSpawn()
+    {
         sr.enabled = true;
         tilemap.SpawnPoint(currentTile);
         rb.position = currentTile.pos;
