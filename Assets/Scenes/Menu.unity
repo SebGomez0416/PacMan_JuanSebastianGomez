@@ -762,6 +762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   credits: {fileID: 1515802972}
+  creditsText: {fileID: 4900000, guid: 0e7591222c669eb478342a8c57cb7c33, type: 3}
 --- !u!1 &916985102
 GameObject:
   m_ObjectHideFlags: 0

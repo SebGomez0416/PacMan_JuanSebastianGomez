@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: Coin
   m_EditorClassIdentifier: 
   amount: 400
-  name: Coin

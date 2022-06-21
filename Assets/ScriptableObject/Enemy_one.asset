@@ -13,4 +13,3 @@ MonoBehaviour:
   m_Name: Enemy_one
   m_EditorClassIdentifier: 
   amount: 30
-  name: Enemy_one

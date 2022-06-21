@@ -5,20 +5,11 @@ using UnityEngine;
 public class LoadCredits : MonoBehaviour
 {
     [SerializeField]private TextMeshProUGUI credits;
+    [SerializeField]private TextAsset creditsText;
 
     private void Awake()
     {
-        LoadText();
+        credits.text = creditsText.text;
     }
-
-    private void LoadText()
-    {
-        //https://docs.unity3d.com/Manual/StreamingAssets.html
-        FileStream fs = File.OpenRead( Application.streamingAssetsPath + "Credits.txt");
-        StreamReader sr = new StreamReader(fs);
-        credits.text = sr.ReadToEnd();
-        
-        sr.Close();
-        fs.Close();        
-    }
+   
 }
