@@ -32,11 +32,11 @@ public class Potion : MonoBehaviour, ISpawmer,ICollectable
     {
         sr.enabled = true;
         currentTile = gameObject.AddComponent<Tile>();// preguntar sergio
-        tilemap.RandSpawnObject(currentTile);
+        tilemap.RandSpawnObject( ref currentTile);
         gameObject.transform.position = currentTile.pos;
     }
     
-    public int Amount()
+    public int GetAmount()
     {
         return SpawnData.Amount;
     }

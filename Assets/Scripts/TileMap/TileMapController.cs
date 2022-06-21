@@ -13,6 +13,7 @@ public class TileMapController : MonoBehaviour
     
     private Tile[,] tilemap;
     [SerializeField] private List<Tile> map;
+    [SerializeField] private List<Tile> roadMap;
 
     private Vector3 position;
     private int id;
@@ -21,6 +22,7 @@ public class TileMapController : MonoBehaviour
     {
         tilemap = new Tile[height, width];
         CreateGrid();
+        CreateRoadMap();
     }
     
     private void Spawn()
@@ -53,39 +55,51 @@ public class TileMapController : MonoBehaviour
         }
     }
 
-    public bool CheckMove(Tile t, Direction direction)
+    private void CreateRoadMap()
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if (!tilemap[i, j].wall)                   
+                      roadMap.Add(tilemap[i, j]);                                                 
+            }
+        }
+    }
+
+    public bool CheckMove( ref Tile t, Direction direction)
     { 
         switch (direction)
         {
             case Direction.Up:
                
-                if (Check(t.x-1,t.y))
-                {               
-                    ChangeTail(t,tilemap[t.x-1 , t.y]);
+                if (CheckLimits(t.x-1,t.y))
+                {
+                    t = tilemap[t.x - 1, t.y];                    
                     return true;
                 }                
                 break;
             
             case Direction.Down:
-                if (Check(t.x+1,t.y))
+                if (CheckLimits(t.x+1,t.y))
                 {
-                    ChangeTail(t,tilemap[t.x+1 , t.y]);
+                    t = tilemap[t.x + 1, t.y];
                     return true;
                 }                
                 break;
             
             case Direction.Left:
-                if (Check(t.x,t.y-1))
-                {                 
-                    ChangeTail(t,tilemap[t.x , t.y-1]);
+                if (CheckLimits(t.x,t.y-1))
+                {
+                    t = tilemap[t.x , t.y-1];
                     return true;
                 }                
                 break;
             
             case Direction.Right:
-                if (Check(t.x,t.y+1))
-                {                 
-                    ChangeTail(t,tilemap[t.x , t.y+1]);
+                if (CheckLimits(t.x,t.y+1))
+                {
+                    t = tilemap[t.x, t.y+1];
                     return true;
                 }                
                 break;
@@ -94,53 +108,41 @@ public class TileMapController : MonoBehaviour
        return false;
     }
 
-    public void RandSpawnObject(Tile t)
+    public void RandSpawnObject(ref Tile t)
     {
-        int randX;
-        int randY;
+        int rand;       
 
         do
         {
-            randX = Random.Range(0, height);
-            randY = Random.Range(0, width);
+            rand = Random.Range(0, roadMap.Count);            
             
-        } while (tilemap[randX,randY].occupied||tilemap[randX,randY].wall);
+        } while (roadMap[rand].occupied|| roadMap[rand].wall);
 
-        ChangeTail(t,tilemap[randX,randY]);
-        tilemap[randX, randY].occupied = true;
+        t = roadMap[rand];
+        roadMap[rand].occupied = true;
     }
     
-    public void RandSpawnCharacters(Tile t)
+    public void RandSpawnCharacters( ref Tile t)
     {
-        int randX;
-        int randY;
+        int rand;
 
         do
         {
-            randX = Random.Range(0, height);
-            randY = Random.Range(0, width);
-            
-        } while (tilemap[randX,randY].wall);
+            rand = Random.Range(0, roadMap.Count);
 
-        ChangeTail(t,tilemap[randX,randY]);
-        
+        } while ( roadMap[rand].wall);
+
+        t = roadMap[rand];
     }
 
-    public void SpawnPoint(Tile t)
+    public void SpawnPoint( ref Tile t)
     {
-        ChangeTail(t,tilemap[0,0]);
+        t=tilemap[0,0];
         tilemap[0, 0].occupied = true;
-    }
+    }    
+   
     
-    private void ChangeTail(Tile a, Tile b)
-    {
-        a.pos = b.pos;
-        a.wall = b.wall;
-        a.x = b.x;
-        a.y = b.y;
-    }
-    
-    private bool Check(int x, int y)
+    private bool CheckLimits(int x, int y)
     {   
         if (x < 0 || y < 0 || x == height || y == width)
             return false;

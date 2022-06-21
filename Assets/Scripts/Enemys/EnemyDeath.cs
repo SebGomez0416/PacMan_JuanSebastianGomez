@@ -17,7 +17,7 @@ public class EnemyDeath : MonoBehaviour, IKillable
         PowerUp.EndPowerUp -= SetActive;
     }
 
-    public void Death()
+    public void Die()
     {
         if (!powerUp) return;
         gameObject.SetActive(false);

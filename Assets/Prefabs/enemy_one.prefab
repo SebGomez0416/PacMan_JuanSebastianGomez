@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1194088179131473882}
   - component: {fileID: 1805779477}
   - component: {fileID: 1805779475}
-  - component: {fileID: 1805779476}
   - component: {fileID: 1778436927}
   - component: {fileID: 1398149720937728882}
+  - component: {fileID: 2425734927879399336}
   m_Layer: 0
   m_Name: enemy_one
   m_TagString: Untagged
@@ -129,18 +129,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 5
   powerUp: 0
---- !u!114 &1805779476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5796493538025071444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b0d593042dbf742924243b0c827f34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!50 &1778436927
 Rigidbody2D:
   serializedVersion: 4
@@ -177,3 +165,15 @@ MonoBehaviour:
   SpawnData: {fileID: 11400000, guid: 9003121562e233d47831c619410f5ca5, type: 2}
   tilemap: {fileID: 0}
   timeToMove: 1
+--- !u!114 &2425734927879399336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796493538025071444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397b973b07307d240b691466db4c71e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

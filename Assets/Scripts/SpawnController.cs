@@ -1,5 +1,3 @@
-
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +14,7 @@ public class SpawnController : MonoBehaviour
      {
           foreach (GameObject obj in objects)
           {
-               for (int i = 0; i < obj.GetComponent<ISpawmer>().Amount(); i++)
+               for (int i = 0; i < obj.GetComponent<ISpawmer>().GetAmount(); i++)
                {
                     GameObject o = Instantiate(obj, transform);
                     o.GetComponent<ISpawmer>().Spawn();

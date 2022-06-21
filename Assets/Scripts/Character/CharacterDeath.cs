@@ -3,19 +3,8 @@ using UnityEngine;
 
 public class CharacterDeath : MonoBehaviour, IKillable
 {
-    [SerializeField]private bool powerUp;
-    private SpriteRenderer sr;
-    private Rigidbody2D rb;
-    private Vector3 init;
-    
-    public static event Action NotifyDeath;
-
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-        rb = GetComponent<Rigidbody2D>();
-        init= new Vector3(0, 2.4f, 0);
-    }
+    [SerializeField]private bool powerUp;   
+    public static event Action NotifyDeath;  
 
     private void OnEnable()
     {
@@ -29,11 +18,9 @@ public class CharacterDeath : MonoBehaviour, IKillable
         PowerUp.EndPowerUp -= SetActive;
     }
 
-    public void Death()
+    public void Die()
     {
-        if (powerUp) return;
-        sr.enabled = false;
-        rb.position = init;
+        if (powerUp) return;       
         NotifyDeath?.Invoke();
     }
 

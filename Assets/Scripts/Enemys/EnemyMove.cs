@@ -8,10 +8,15 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     private Tile currentTile;
     private bool gameOver;
     
-    private Rigidbody2D rb;
+    private Rigidbody2D rb;    
     private TileMapController.Direction _direction;
     [SerializeField] private float timeToMove;
     private float time;
+
+    private void Awake()
+    {
+      rb = GetComponent<Rigidbody2D>();
+    }
 
     private void OnEnable()
     {
@@ -30,16 +35,14 @@ public class EnemyMove : MonoBehaviour,ISpawmer
 
     public void Spawn()
     {
-        rb = GetComponent<Rigidbody2D>();
-        _direction = (TileMapController.Direction)Random.Range(0, 4);
         gameObject.SetActive(true);
+        _direction = (TileMapController.Direction)Random.Range(0, 4);        
         currentTile = gameObject.AddComponent<Tile>();
-        tilemap.RandSpawnCharacters(currentTile);
-        rb.position = currentTile.pos;
-        
+        tilemap.RandSpawnCharacters( ref currentTile);
+        rb.position = currentTile.pos;        
     }
     
-    public int Amount()
+    public int GetAmount()
     {
         return SpawnData.Amount;
     }
@@ -57,12 +60,12 @@ public class EnemyMove : MonoBehaviour,ISpawmer
         if (time >= timeToMove)
         {
             time = 0;
-            bool check = tilemap.CheckMove(currentTile, _direction);
+            bool check = tilemap.CheckMove( ref currentTile, _direction);
         
             while (!check)
             {
                 _direction = (TileMapController.Direction)Random.Range(0, 4);
-                check = tilemap.CheckMove(currentTile, _direction);
+                check = tilemap.CheckMove( ref currentTile, _direction);
             }
         
             rb.position = currentTile.pos;

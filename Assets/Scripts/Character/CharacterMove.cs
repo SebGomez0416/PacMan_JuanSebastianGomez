@@ -10,29 +10,33 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
     private bool gameOver;
+    private Vector2 initPos;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         currentTile = gameObject.AddComponent<Tile>();
+        initPos = rb.position;
     }
 
     private void Start()
     {
         sr.enabled = true;
-        tilemap.SpawnPoint(currentTile);
+        tilemap.SpawnPoint( ref currentTile);
         rb.position = currentTile.pos;
     }
     
     private void OnEnable()
     {
-        CharacterDeath.NotifyDeath += Spawn;
+        CharacterDeath.NotifyDeath += ResetPosition;
+        CharacterDeath.NotifyDeath += Spawn;       
         UI.SendGameOver += SetGameOver;
     }
 
     private void OnDisable()
     {
+        CharacterDeath.NotifyDeath -= ResetPosition;
         CharacterDeath.NotifyDeath -= Spawn;
         UI.SendGameOver -= SetGameOver;
     }
@@ -45,8 +49,14 @@ public class CharacterMove : MonoBehaviour
     private void ReSpawn()
     {
         sr.enabled = true;
-        tilemap.SpawnPoint(currentTile);
+        tilemap.SpawnPoint( ref currentTile);
         rb.position = currentTile.pos;
+    }
+
+    public void ResetPosition()
+    {
+        sr.enabled = false;
+        rb.position = initPos;
     }
 
     private void SetGameOver()
@@ -73,7 +83,7 @@ public class CharacterMove : MonoBehaviour
     private void Movement(TileMapController.Direction direction)
     {
         if (gameOver) return;
-        tilemap.CheckMove(currentTile, direction);
+        tilemap.CheckMove( ref currentTile, direction);
         rb.position = currentTile.pos;
         
         // rb.position = Vector2.Lerp(rb.position,currentTile.pos,Time.fixedDeltaTime*speed);

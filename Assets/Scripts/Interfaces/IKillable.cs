@@ -1,5 +1,5 @@
 
 public interface IKillable 
 {
-    public void Death();
+    public void Die();
 }
