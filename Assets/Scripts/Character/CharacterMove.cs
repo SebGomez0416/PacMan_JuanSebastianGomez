@@ -16,14 +16,13 @@ public class CharacterMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        currentTile = gameObject.AddComponent<Tile>();
         initPos = rb.position;
     }
 
     private void Start()
     {
         sr.enabled = true;
-        tilemap.SpawnPoint( ref currentTile);
+        tilemap.SpawnPoint( out currentTile);
         rb.position = currentTile.pos;
     }
     
@@ -49,7 +48,7 @@ public class CharacterMove : MonoBehaviour
     private void ReSpawn()
     {
         sr.enabled = true;
-        tilemap.SpawnPoint( ref currentTile);
+        tilemap.SpawnPoint( out currentTile);
         rb.position = currentTile.pos;
     }
 

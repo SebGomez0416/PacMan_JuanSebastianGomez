@@ -6,29 +6,32 @@ using System.IO;
 public class TileMapController : MonoBehaviour
 {
     public enum Direction {Up,Down,Left,Right}
-    
+
     [SerializeField] private int height;
     [SerializeField] private int width;
+
+    [SerializeField] private string level;
     
     [SerializeField] private SpriteRenderer sizeTile;
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject groundPrefab;
+    [SerializeField] private GameObject door;
     
     private Tile[,] tilemap;
-    [SerializeField]private List<Tile> roadMap;
+    private List<Tile> roadMap;
     private Vector3 position;
 
     private void Awake()
     {
        tilemap = new Tile[height, width];
-       //roadMap = new List<Tile>();
+       roadMap = new List<Tile>();
        Spawn();
        CreateRoadMap();
     }
     
     private void Spawn()
     {
-        FileStream file = File.Open("Assets/Data/Lv.dat", FileMode.Open);
+        FileStream file = File.Open("Assets/Data/"+level+".dat", FileMode.Open);
         BinaryReader br = new BinaryReader(file);
         
         for (int i = 0; i < height; i++)
@@ -48,6 +51,13 @@ public class TileMapController : MonoBehaviour
         }
         br.Close();
         file.Close();
+        SpawnDoor();
+    }
+
+    private void SpawnDoor()
+    {
+        Instantiate(door, tilemap[0, height / 2].pos, gameObject.transform.rotation, transform);
+
     }
     
     private void InitTile( GameObject obj ,int i ,int j, bool wall)
@@ -57,7 +67,7 @@ public class TileMapController : MonoBehaviour
       tilemap[i, j].y= j;
       tilemap[i, j].wall= wall;
     }
-    
+
     private void CreateRoadMap()
     {
         for (int i = 0; i < height; i++)
@@ -110,7 +120,7 @@ public class TileMapController : MonoBehaviour
        return false;
     }
 
-    public void RandSpawnObject(ref Tile t)
+    public void RandSpawnObject(out Tile t)
     {
         int rand;       
 
@@ -124,7 +134,7 @@ public class TileMapController : MonoBehaviour
         roadMap[rand].occupied = true;
     }
     
-    public void RandSpawnCharacters( ref Tile t)
+    public void RandSpawnCharacters( out Tile t)
     {
         int rand;
 
@@ -137,10 +147,9 @@ public class TileMapController : MonoBehaviour
         t = roadMap[rand];
     }
 
-    public void SpawnPoint( ref Tile t)
+    public void SpawnPoint( out Tile t)
     {
-        t=tilemap[30,5];
-        tilemap[1, 1].occupied = true;
+        t=tilemap[0,height/2];
     }
 
     private bool CheckLimits(int x, int y)

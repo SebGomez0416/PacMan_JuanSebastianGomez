@@ -36,9 +36,8 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     public void Spawn()
     {
         gameObject.SetActive(true);
-        _direction = (TileMapController.Direction)Random.Range(0, 4);        
-        currentTile = gameObject.AddComponent<Tile>();
-        tilemap.RandSpawnCharacters( ref currentTile);
+        _direction = (TileMapController.Direction)Random.Range(0, 4);
+        tilemap.RandSpawnCharacters( out currentTile);
         rb.position = currentTile.pos;        
     }
     
