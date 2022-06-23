@@ -99,8 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnData: {fileID: 11400000, guid: 78339a51195ad2749bb3050ba8016841, type: 2}
-  score: 0
-  tilemap: {fileID: 0}
+  tilemap: {fileID: 3553776889059467424, guid: 7c105509ce2aedb4693cb664fa54daa3, type: 3}
 --- !u!61 &8690788372453462890
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.IO;
 
 public class TileMapController : MonoBehaviour
 {
@@ -9,52 +10,54 @@ public class TileMapController : MonoBehaviour
     [SerializeField] private int height;
     [SerializeField] private int width;
     
-    [SerializeField] private SpriteRenderer ground;
+    [SerializeField] private SpriteRenderer sizeTile;
+    [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject groundPrefab;
     
     private Tile[,] tilemap;
-    [SerializeField] private List<Tile> map;
-    [SerializeField] private List<Tile> roadMap;
-
+    [SerializeField]private List<Tile> roadMap;
     private Vector3 position;
-    private int id;
 
     private void Awake()
     {
-        tilemap = new Tile[height, width];
-        CreateGrid();
-        CreateRoadMap();
+       tilemap = new Tile[height, width];
+       //roadMap = new List<Tile>();
+       Spawn();
+       CreateRoadMap();
     }
     
     private void Spawn()
     {
+        FileStream file = File.Open("Assets/Data/Lv.dat", FileMode.Open);
+        BinaryReader br = new BinaryReader(file);
+        
         for (int i = 0; i < height; i++)
         {
             for (int j = 0; j < width; j++)
             {   
                 if(j!=0)
-                    position.x += ground.bounds.size.x;
+                    position.x += sizeTile.bounds.size.x;
                 if(i!=0)
-                    position.y = ground.transform.position.y - ground.bounds.size.y *i;
+                    position.y = sizeTile.transform.position.y - sizeTile.bounds.size.y *i;
                 if (i != 0 && j == 0)
-                    position.x = ground.transform.position.x;
+                    position.x = sizeTile.transform.position.x;
 
+                bool isWall = br.ReadBoolean();
+                InitTile(isWall ? wallPrefab : groundPrefab, i, j, isWall);
             }
         }
+        br.Close();
+        file.Close();
     }
-    private void CreateGrid()
+    
+    private void InitTile( GameObject obj ,int i ,int j, bool wall)
     {
-        for (int i = 0; i < height; i++)
-        {
-            for (int j = 0; j < width; j++)
-            {
-                tilemap[i, j] = map[id];
-                tilemap[i, j].x = i;
-                tilemap[i, j].y = j;
-                id++;
-            }
-        }
+      tilemap[i, j] =Instantiate(obj, position, sizeTile.gameObject.transform.rotation, transform).GetComponent<Tile>();
+      tilemap[i, j].x = i;
+      tilemap[i, j].y= j;
+      tilemap[i, j].wall= wall;
     }
-
+    
     private void CreateRoadMap()
     {
         for (int i = 0; i < height; i++)
@@ -68,11 +71,10 @@ public class TileMapController : MonoBehaviour
     }
 
     public bool CheckMove( ref Tile t, Direction direction)
-    { 
+    {
         switch (direction)
         {
             case Direction.Up:
-               
                 if (CheckLimits(t.x-1,t.y))
                 {
                     t = tilemap[t.x - 1, t.y];                    
@@ -137,19 +139,15 @@ public class TileMapController : MonoBehaviour
 
     public void SpawnPoint( ref Tile t)
     {
-        t=tilemap[0,0];
-        tilemap[0, 0].occupied = true;
-    }    
-   
-    
+        t=tilemap[30,5];
+        tilemap[1, 1].occupied = true;
+    }
+
     private bool CheckLimits(int x, int y)
     {   
         if (x < 0 || y < 0 || x == height || y == width)
             return false;
         else return !tilemap[x, y].wall;
     }
-    
-    
 
-    
 }
