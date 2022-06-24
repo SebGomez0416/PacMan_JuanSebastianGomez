@@ -500,6 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: {fileID: 6672821183821681528, guid: 1c99794af0dadfd4d984bbfa476ffb38, type: 3}
   offSet: 45
+  gameOver: {fileID: 8300000, guid: 8ee9515c52ec1d446b111f55333fb8c4, type: 3}
 --- !u!114 &836807236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textScore: {fileID: 6481918636352608432}
   scoreToWin: 20
+  nextLevel: {fileID: 8300000, guid: 6ad7994bea87cd443ab97b4fc7665bc8, type: 3}
 --- !u!114 &6481918636867072619
 MonoBehaviour:
   m_ObjectHideFlags: 0

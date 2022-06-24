@@ -16,8 +16,6 @@ public class UI : MonoBehaviour
     private void Start()
     {
         DataBetweenScenes.instance.level++;
-        if( DataBetweenScenes.instance.level == 1) DataBetweenScenes.instance.Init();
-        InitUI?.Invoke();
     }
 
     private void OnEnable()

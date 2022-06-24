@@ -5,11 +5,13 @@ public class Lives : MonoBehaviour
 {
     [SerializeField] private GameObject life;
     [SerializeField] private float offSet;
+    [SerializeField] private AudioClip gameOver;
     
     private GameObject[] lives;
     public static event Action GameOver;
+    public static event Action <string> PlaySound;
     
-    private void Init()
+    private void Start()
     {
         lives = new GameObject[ DataBetweenScenes.instance.lives];
         SpawnLives();
@@ -18,13 +20,11 @@ public class Lives : MonoBehaviour
     private void OnEnable()
     {
         CharacterDeath.NotifyDeath += UpdateLives;
-        UI.InitUI += Init;
     }
 
     private void OnDisable()
     {
         CharacterDeath.NotifyDeath -= UpdateLives;
-        UI.InitUI -= Init;
     }
     
     private void  SpawnLives()
@@ -41,6 +41,10 @@ public class Lives : MonoBehaviour
         DataBetweenScenes.instance.lives--;
         lives[ DataBetweenScenes.instance.lives].gameObject.SetActive(false);
         if (DataBetweenScenes.instance.lives == 0)
+        {
             GameOver?.Invoke();
+            PlaySound?.Invoke(gameOver.name);
+        }
+           
     }
 }

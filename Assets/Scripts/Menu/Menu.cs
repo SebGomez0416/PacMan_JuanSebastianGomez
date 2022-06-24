@@ -1,10 +1,14 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
     [SerializeField] private GameObject creditsScreen;
+
+    private void Start()
+    {
+        DataBetweenScenes.instance.Init();
+    }
 
     public void PlayButton()
     {

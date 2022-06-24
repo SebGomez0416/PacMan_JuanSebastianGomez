@@ -1,8 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
    private AudioSource _audioSource;
+   [SerializeField] private List<AudioClip> audioClips;
 
    private void Awake()
    {
@@ -13,6 +15,8 @@ public class AudioController : MonoBehaviour
       UIAudioSettings.MuteAudio += Mute;
       UIAudioSettings.SendVolume += Volume;
       UIAudioSettings.InitAudio += init;
+      Lives.PlaySound += ChangeAudioClip;
+      Score.PlaySound += ChangeAudioClip;
    }
 
    private void OnDisable()
@@ -20,12 +24,26 @@ public class AudioController : MonoBehaviour
       UIAudioSettings.MuteAudio -= Mute;
       UIAudioSettings.SendVolume -= Volume;
       UIAudioSettings.InitAudio -= init;
+      Lives.PlaySound -= ChangeAudioClip;
+      Score.PlaySound -= ChangeAudioClip;
    }
    
    private void init()
    {
       _audioSource.volume = DataBetweenScenes.instance.Volume;
       _audioSource.mute = DataBetweenScenes.instance.mute;
+   }
+
+   private void ChangeAudioClip(string name)
+   {
+      foreach (var clip in audioClips)
+      {
+         if (clip.name == name)
+            _audioSource.clip = clip;
+      }
+
+      _audioSource.loop = false;
+      _audioSource.Play();
    }
 
    private void Volume(float v)
