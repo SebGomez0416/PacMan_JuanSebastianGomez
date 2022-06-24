@@ -11,28 +11,30 @@ public class UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textWin;
     [SerializeField] private GameObject life;
     [SerializeField] private GameObject screenGameOver;
+    [SerializeField] private GameObject nextLevel;
+    
     [SerializeField] private float offSet;
     [SerializeField] private int scoreToWin;
     
     private bool timerBool;
     private float currentTime;
     private TimeSpan timer;
-    private int score;
-    private int AmountLife;
     private GameObject[] lives;
 
     public static event Action SendGameOver;
 
-    private void Awake()
-    {
-        textClock.text = "00:00";
-        timerBool = false;
-        AmountLife = 3;
-        lives = new GameObject[AmountLife];
-        SpawnLives();
-    }
     private void Start()
     {
+        DataBetweenScenes.instance.level++;
+        
+        if( DataBetweenScenes.instance.level == 1) DataBetweenScenes.instance.Init();
+        
+        textScore.text = ""+DataBetweenScenes.instance.ScoreCoins;
+        textClock.text = "00:00";
+        timerBool = false;
+        lives = new GameObject[ DataBetweenScenes.instance.lives];
+        
+        SpawnLives();
         InitTimer();
     }
 
@@ -51,7 +53,7 @@ public class UI : MonoBehaviour
     private void InitTimer()
     {
         timerBool = true;
-        currentTime = 0;
+        currentTime = DataBetweenScenes.instance.time;
         StartCoroutine("UpdateTime");
     }
 
@@ -65,6 +67,7 @@ public class UI : MonoBehaviour
         while (timerBool)
         {
             currentTime += Time.deltaTime;
+            DataBetweenScenes.instance.time = currentTime;
             timer =TimeSpan.FromSeconds(currentTime);
             string timerStr =" "+ timer.ToString("mm':'ss");
             textClock.text = timerStr;
@@ -74,25 +77,33 @@ public class UI : MonoBehaviour
 
     private void UpdateScore(int s)
     {
-        score += s;
-        textScore.text = ""+score;
-        if (score == scoreToWin)
+        DataBetweenScenes.instance.ScoreCoins += s;
+        textScore.text = ""+ DataBetweenScenes.instance.ScoreCoins;
+        if ( DataBetweenScenes.instance.ScoreCoins == scoreToWin )
         {
-            textWin.enabled = true;
+            if (DataBetweenScenes.instance.level == 3)
+            {
+                textWin.enabled = true;
+                nextLevel.SetActive(false);
+            }
             GameOver();
         }
     }
 
     private void UpdateLives()
     {
-        AmountLife--;
-        lives[AmountLife].gameObject.SetActive(false);
-        if (AmountLife == 0)
+        DataBetweenScenes.instance.lives--;
+        lives[ DataBetweenScenes.instance.lives].gameObject.SetActive(false);
+        if (DataBetweenScenes.instance.lives == 0)
+        {
+            nextLevel.SetActive(false);
             GameOver();
+        }
+          
     }
     
     private void GameOver()
-    {
+    { 
         EndTime();
         SendGameOver?.Invoke();
         screenGameOver.SetActive(true);
@@ -108,15 +119,17 @@ public class UI : MonoBehaviour
     }
 
    
-    public void ButtonMenu()
+    public void ChangeScene(string scene)
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(scene);
     }
 
     public void ButtonExit()
     {
         Application.Quit();
     }
+    
+    
    
 
 }

@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 
     public void ButtonPlay()
     {
-        SceneManager.LoadScene("Gameplay");
+        SceneManager.LoadScene("LvOne");
     }
 
     public void ButtonCredits(bool set)

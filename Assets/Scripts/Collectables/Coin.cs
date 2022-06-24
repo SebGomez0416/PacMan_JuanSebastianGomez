@@ -19,8 +19,7 @@ public class Coin : MonoBehaviour, ISpawmer,ICollectable
    public void Spawn()
    {
       sr.enabled = true;
-      currentTile = gameObject.AddComponent<Tile>();
-      tilemap.RandSpawnObject( ref currentTile);
+      tilemap.RandSpawnObject( out currentTile);
       gameObject.transform.position = currentTile.pos;
    }
    
