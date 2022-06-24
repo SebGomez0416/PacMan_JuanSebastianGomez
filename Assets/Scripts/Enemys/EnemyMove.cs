@@ -30,7 +30,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     
     private void SetGameOver()
     {
-        gameOver = true;
+        gameOver = !gameOver;
     }
 
     public void Spawn()

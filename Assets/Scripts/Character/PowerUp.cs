@@ -7,6 +7,7 @@ public class PowerUp : MonoBehaviour
     private float lerpTime;
     [SerializeField] private float time;
     [SerializeField] private float speedChange;
+    private bool isPause;
     private SpriteRenderer sr;
 
     public static event Action EndPowerUp;
@@ -19,11 +20,19 @@ public class PowerUp : MonoBehaviour
     private void OnEnable()
     {
         Potion.ActivePowerUp += Active;
+        UI.SendGameOver += SetPause;
     }
 
     private void OnDisable()
     {
         Potion.ActivePowerUp -= Active;
+        UI.SendGameOver -= SetPause;
+    }
+
+    private void SetPause()
+    {
+        isPause = !isPause;
+        // preguntar sergio tema coorutina
     }
 
     private void Active()
@@ -37,12 +46,12 @@ public class PowerUp : MonoBehaviour
         Change();
         yield return new WaitForSeconds(speedChange);
         if (lerpTime <= time)
-            StartCoroutine("Colors");
+         StartCoroutine("Colors");
         else
         { 
-            EndPowerUp?.Invoke();
-            lerpTime = 0;
-            sr.color = Color.white;
+           EndPowerUp?.Invoke();
+           lerpTime = 0;
+           sr.color = Color.white;
         }
     }
 

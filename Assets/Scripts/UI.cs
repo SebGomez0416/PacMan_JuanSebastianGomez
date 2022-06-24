@@ -9,6 +9,8 @@ public class UI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textClock;
     [SerializeField] private TextMeshProUGUI textScore;
     [SerializeField] private TextMeshProUGUI textWin;
+    [SerializeField] private TextMeshProUGUI textGameOver;
+    [SerializeField] private TextMeshProUGUI textPause;
     [SerializeField] private GameObject life;
     [SerializeField] private GameObject screenGameOver;
     [SerializeField] private GameObject nextLevel;
@@ -17,6 +19,7 @@ public class UI : MonoBehaviour
     [SerializeField] private int scoreToWin;
     
     private bool timerBool;
+    private bool isPause;
     private float currentTime;
     private TimeSpan timer;
     private GameObject[] lives;
@@ -50,6 +53,12 @@ public class UI : MonoBehaviour
         CharacterDeath.NotifyDeath -= UpdateLives;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Pause();
+    }
+
     private void InitTimer()
     {
         timerBool = true;
@@ -81,6 +90,7 @@ public class UI : MonoBehaviour
         textScore.text = ""+ DataBetweenScenes.instance.ScoreCoins;
         if ( DataBetweenScenes.instance.ScoreCoins == scoreToWin )
         {
+            nextLevel.SetActive(true);
             if (DataBetweenScenes.instance.level == 3)
             {
                 textWin.enabled = true;
@@ -103,10 +113,21 @@ public class UI : MonoBehaviour
     }
     
     private void GameOver()
-    { 
+    {
+        textGameOver.enabled = true;
         EndTime();
         SendGameOver?.Invoke();
         screenGameOver.SetActive(true);
+    }
+
+    private void Pause()
+    {
+        isPause = !isPause;
+        if (isPause) timerBool = false;
+        else InitTimer();
+        textPause.enabled = isPause;
+        screenGameOver.SetActive(isPause);
+        SendGameOver?.Invoke();
     }
 
     private void  SpawnLives()
@@ -118,7 +139,6 @@ public class UI : MonoBehaviour
         }
     }
 
-   
     public void ChangeScene(string scene)
     {
         SceneManager.LoadScene(scene);

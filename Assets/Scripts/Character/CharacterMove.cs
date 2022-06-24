@@ -63,7 +63,7 @@ public class CharacterMove : MonoBehaviour
 
     private void SetGameOver()
     {
-        gameOver = true;
+        gameOver = !gameOver;
     }
 
     private void Update()
