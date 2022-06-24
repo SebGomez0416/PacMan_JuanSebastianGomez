@@ -670,6 +670,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 836807236, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
+      propertyPath: scoreToWin
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4047942129646777979, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6481918636377164000, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
       propertyPath: m_Name
       value: UI
