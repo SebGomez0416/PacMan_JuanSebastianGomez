@@ -10,6 +10,7 @@ public class CharacterMove : MonoBehaviour
     [SerializeField]private TileMapController tilemap;
     private Tile currentTile;
     private bool gameOver;
+    private bool isMove;
     private Vector2 initPos;
 
     private void Awake()
@@ -50,12 +51,14 @@ public class CharacterMove : MonoBehaviour
         sr.enabled = true;
         tilemap.SpawnPoint( out currentTile);
         rb.position = currentTile.pos;
+        isMove = false;
     }
 
-    public void ResetPosition()
-    {
+    private void ResetPosition()
+    {   
         sr.enabled = false;
         rb.position = initPos;
+        isMove = true;
     }
 
     private void SetGameOver()
@@ -81,7 +84,7 @@ public class CharacterMove : MonoBehaviour
 
     private void Movement(TileMapController.Direction direction)
     {
-        if (gameOver) return;
+        if (gameOver || isMove) return;
         tilemap.CheckMove( ref currentTile, direction);
         rb.position = currentTile.pos;
         
