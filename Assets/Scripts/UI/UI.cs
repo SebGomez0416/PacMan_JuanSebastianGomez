@@ -9,6 +9,7 @@ public class UI : MonoBehaviour
     [SerializeField] private GameObject PauseScreen;
 
     private bool isPause;
+    private bool isActiveSettings;
     public static event Action SendGameOver;
     public static event Action InitUI;
 
@@ -23,18 +24,25 @@ public class UI : MonoBehaviour
     {
         Score.NextLevel += NextLevel;
         Lives.GameOver += GameOver;
+        UIAudioSettings.IsActiveSettings +=getActiveSettings ;
     }
 
     private void OnDisable()
     {
         Score.NextLevel -= NextLevel;
         Lives.GameOver -= GameOver;
+        UIAudioSettings.IsActiveSettings -= getActiveSettings ;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
             Pause();
+    }
+
+    private void getActiveSettings(bool get)
+    {
+        isActiveSettings = get;
     }
 
     private void NextLevel()
@@ -51,6 +59,7 @@ public class UI : MonoBehaviour
 
     private void Pause()
     {
+        if (isActiveSettings) return;
         isPause = !isPause;
         PauseScreen.SetActive(isPause);
         SendGameOver?.Invoke();

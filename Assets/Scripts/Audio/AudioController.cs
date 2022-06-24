@@ -11,14 +11,14 @@ public class AudioController : MonoBehaviour
 
    private void OnEnable()
    {
-      Menu.MuteAudio += Mute;
-      Menu.SendVolume += Volume;
+      UIAudioSettings.MuteAudio += Mute;
+      UIAudioSettings.SendVolume += Volume;
    }
 
    private void OnDisable()
    {
-      Menu.MuteAudio -= Mute;
-      Menu.SendVolume -= Volume;
+      UIAudioSettings.MuteAudio -= Mute;
+      UIAudioSettings.SendVolume -= Volume;
    }
 
    private void Volume(float v)
