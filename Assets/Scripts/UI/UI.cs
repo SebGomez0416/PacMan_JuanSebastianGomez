@@ -11,12 +11,7 @@ public class UI : MonoBehaviour
     private bool isPause;
     private bool isActiveSettings;
     public static event Action SendGameOver;
-    public static event Action InitUI;
-
-    private void Start()
-    {
-        DataBetweenScenes.instance.level++;
-    }
+    
 
     private void OnEnable()
     {
@@ -63,9 +58,15 @@ public class UI : MonoBehaviour
         SendGameOver?.Invoke();
     }
     
-    public void ChangeScene(string scene)
+    public void MenuButton()
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene("Menu");
+    }
+    
+    public void ChangeLevel()
+    {
+        DataBetweenScenes.instance.level++; 
+        SceneManager.LoadScene(DataBetweenScenes.instance.level);
     }
 
     public void ButtonExit()
