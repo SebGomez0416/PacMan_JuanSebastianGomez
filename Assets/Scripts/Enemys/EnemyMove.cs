@@ -9,7 +9,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     private bool gameOver;
     
     private Rigidbody2D rb;    
-    private TileMapController.Direction _direction;
+    private Direction.Dir _direction;
     [SerializeField] private float timeToMove;
     private float time;
 
@@ -36,7 +36,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     public void Spawn()
     {
         gameObject.SetActive(true);
-        _direction = (TileMapController.Direction)Random.Range(0, 4);
+        _direction = (Direction.Dir)Random.Range(0, 4);
         tilemap.RandSpawnCharacters( out currentTile);
         rb.position = currentTile.pos;        
     }
@@ -63,7 +63,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
         
             while (!check)
             {
-                _direction = (TileMapController.Direction)Random.Range(0, 4);
+                _direction = (Direction.Dir)Random.Range(0, 4);
                 check = tilemap.CheckMove( ref currentTile, _direction);
             }
         

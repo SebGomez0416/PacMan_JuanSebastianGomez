@@ -5,8 +5,6 @@ using System.IO;
 
 public class TileMapController : MonoBehaviour
 {
-    public enum Direction {Up,Down,Left,Right}
-
     [SerializeField] private int height;
     [SerializeField] private int width;
 
@@ -25,6 +23,7 @@ public class TileMapController : MonoBehaviour
     {
        tilemap = new Tile[height, width];
        roadMap = new List<Tile>();
+       position = sizeTile.transform.position;
        Spawn();
        CreateRoadMap();
     }
@@ -80,11 +79,11 @@ public class TileMapController : MonoBehaviour
         }
     }
 
-    public bool CheckMove( ref Tile t, Direction direction)
+    public bool CheckMove( ref Tile t, Direction.Dir direction)
     {
         switch (direction)
         {
-            case Direction.Up:
+            case Direction.Dir.Up:
                 if (CheckLimits(t.x-1,t.y))
                 {
                     t = tilemap[t.x - 1, t.y];                    
@@ -92,7 +91,7 @@ public class TileMapController : MonoBehaviour
                 }                
                 break;
             
-            case Direction.Down:
+            case Direction.Dir.Down:
                 if (CheckLimits(t.x+1,t.y))
                 {
                     t = tilemap[t.x + 1, t.y];
@@ -100,7 +99,7 @@ public class TileMapController : MonoBehaviour
                 }                
                 break;
             
-            case Direction.Left:
+            case Direction.Dir.Left:
                 if (CheckLimits(t.x,t.y-1))
                 {
                     t = tilemap[t.x , t.y-1];
@@ -108,7 +107,7 @@ public class TileMapController : MonoBehaviour
                 }                
                 break;
             
-            case Direction.Right:
+            case Direction.Dir.Right:
                 if (CheckLimits(t.x,t.y+1))
                 {
                     t = tilemap[t.x, t.y+1];

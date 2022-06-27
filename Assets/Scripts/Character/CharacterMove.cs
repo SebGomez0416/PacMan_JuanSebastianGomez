@@ -70,19 +70,19 @@ public class CharacterMove : MonoBehaviour
     {
 
         if (Input.GetKeyDown(KeyCode.W))
-            Movement(TileMapController.Direction.Up);
+            Movement(Direction.Dir.Up);
 
         if (Input.GetKeyDown(KeyCode.S))
-            Movement(TileMapController.Direction.Down);
+            Movement(Direction.Dir.Down);
 
         if (Input.GetKeyDown(KeyCode.A))
-            Movement(TileMapController.Direction.Left);
+            Movement(Direction.Dir.Left);
         
         if (Input.GetKeyDown(KeyCode.D))
-            Movement(TileMapController.Direction.Right);
+            Movement(Direction.Dir.Right);
     }
 
-    private void Movement(TileMapController.Direction direction)
+    private void Movement(Direction.Dir direction)
     {
         if (gameOver || isMove) return;
         tilemap.CheckMove( ref currentTile, direction);
