@@ -5,6 +5,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
 {
     [SerializeField] private SpawnData SpawnData;
     [SerializeField]private TileMapController tilemap;
+    [SerializeField] private float lerpTime;
     private Tile currentTile;
     private bool gameOver;
     
@@ -53,7 +54,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
 
     private void Move()
     {
-        if (gameOver) return;
+       if (gameOver) return;
         time += 1 * Time.deltaTime;
 
         if (time >= timeToMove)
@@ -66,8 +67,8 @@ public class EnemyMove : MonoBehaviour,ISpawmer
                 _direction = (Direction.Dir)Random.Range(0, 4);
                 check = tilemap.CheckMove( ref currentTile, _direction);
             }
-        
-            rb.position = currentTile.pos;
         }
+        
+        rb.MovePosition(Vector2.Lerp(rb.position,currentTile.pos,lerpTime));
     }
 }

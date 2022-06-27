@@ -117,7 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnData: {fileID: 11400000, guid: c9fca200ac40f4f498b51d2fee838b77, type: 2}
   tilemap: {fileID: 0}
-  timeToMove: 1
+  lerpTime: 0.05
+  timeToMove: 0.8
 --- !u!114 &5554906055394499946
 MonoBehaviour:
   m_ObjectHideFlags: 0
