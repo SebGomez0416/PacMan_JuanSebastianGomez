@@ -9,7 +9,8 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     private Tile currentTile;
     private bool gameOver;
     
-    private Rigidbody2D rb;    
+    private Rigidbody2D rb;  
+    private SpriteRenderer sr;
     private Direction.Dir _direction;
     [SerializeField] private float timeToMove;
     private float time;
@@ -17,6 +18,7 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     private void Awake()
     {
       rb = GetComponent<Rigidbody2D>();
+      sr = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -68,6 +70,9 @@ public class EnemyMove : MonoBehaviour,ISpawmer
                 check = tilemap.CheckMove( ref currentTile, _direction);
             }
         }
+        
+        if (_direction == Direction.Dir.Left) sr.flipX = true;
+        if (_direction == Direction.Dir.Right) sr.flipX = false;
         
         rb.MovePosition(Vector2.Lerp(rb.position,currentTile.pos,lerpTime));
     }
