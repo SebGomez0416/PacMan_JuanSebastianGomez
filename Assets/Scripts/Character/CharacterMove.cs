@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
@@ -6,12 +5,14 @@ public class CharacterMove : MonoBehaviour
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
-    [SerializeField] private float speed;
+    [SerializeField] private float lerpTime;
     [SerializeField]private TileMapController tilemap;
+    [SerializeField] private float timeToMove;
     private Tile currentTile;
     private bool gameOver;
     private bool isMove;
     private Vector2 initPos;
+    private float time;
 
     private void Awake()
     {
@@ -56,6 +57,7 @@ public class CharacterMove : MonoBehaviour
 
     private void ResetPosition()
     {   
+        Debug.Log("entras aca");
         sr.enabled = false;
         rb.position = initPos;
         isMove = true;
@@ -68,28 +70,34 @@ public class CharacterMove : MonoBehaviour
 
     private void Update()
     {
+        time += 1 * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.W))
-            Movement(Direction.Dir.Up);
+        if (time >= timeToMove)
+        {
+            if (Input.GetKeyDown(KeyCode.W))
+                Movement(Direction.Dir.Up);
 
-        if (Input.GetKeyDown(KeyCode.S))
-            Movement(Direction.Dir.Down);
+            if (Input.GetKeyDown(KeyCode.S))
+                Movement(Direction.Dir.Down);
 
-        if (Input.GetKeyDown(KeyCode.A))
-            Movement(Direction.Dir.Left);
+            if (Input.GetKeyDown(KeyCode.A))
+                Movement(Direction.Dir.Left);
         
-        if (Input.GetKeyDown(KeyCode.D))
-            Movement(Direction.Dir.Right);
+            if (Input.GetKeyDown(KeyCode.D))
+                Movement(Direction.Dir.Right);
+        }
+        
+        if (gameOver || isMove) return;
+        rb.MovePosition(Vector2.Lerp(rb.position, currentTile.pos, lerpTime));
     }
 
     private void Movement(Direction.Dir direction)
     {
-        if (gameOver || isMove) return;
-        tilemap.CheckMove( ref currentTile, direction);
-        rb.position = currentTile.pos;
-        
-        // rb.position = Vector2.Lerp(rb.position,currentTile.pos,Time.fixedDeltaTime*speed);
-    }
+        if (direction == Direction.Dir.Left) sr.flipX = true;
+        if (direction == Direction.Dir.Right) sr.flipX = false;
 
-   
+        if (gameOver || isMove) return;
+        time = 0;
+        tilemap.CheckMove( ref currentTile, direction);
+    }
 }

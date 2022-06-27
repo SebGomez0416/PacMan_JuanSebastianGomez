@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class CharacterDeath : MonoBehaviour, IKillable
 {
-    [SerializeField]private bool powerUp;   
-    public static event Action NotifyDeath;  
+    private bool powerUp;   
+    public static event Action NotifyDeath;
 
     private void OnEnable()
     {

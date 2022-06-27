@@ -278,10 +278,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: character
       objectReference: {fileID: 0}
-    - target: {fileID: 2290744065084508348, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7026059484420144859, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: tilemap
       value: 
@@ -292,11 +288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8655479587244101850, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 4.19
       objectReference: {fileID: 0}
     - target: {fileID: 8655479587244101850, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.4
+      value: 32.56
       objectReference: {fileID: 0}
     - target: {fileID: 8655479587244101850, guid: b380892b0ff15254fb74800eae55f0fd, type: 3}
       propertyPath: m_LocalPosition.z
