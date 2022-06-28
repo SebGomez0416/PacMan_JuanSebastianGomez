@@ -18,7 +18,8 @@ public class SaveController : MonoBehaviour
       data.lives = DataBetweenScenes.instance.lives;
       data.time = DataBetweenScenes.instance.time;
       data.level = DataBetweenScenes.instance.level;
-      
+      data.Volume = DataBetweenScenes.instance.Volume;
+      data.mute = DataBetweenScenes.instance.mute;   
 
       bf.Serialize(file, data);
    }

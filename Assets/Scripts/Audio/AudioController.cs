@@ -1,12 +1,15 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-   private AudioSource _audioSource;
-   [SerializeField] private List<AudioClip> audioClips;
+    private AudioSource _audioSource;
+    [SerializeField] private List<AudioClip> audioClips;
 
-   private void Awake()
+    public static event Action LoadPref;
+
+    private void Awake()
    {
       _audioSource = GetComponent<AudioSource>();
    }
@@ -30,6 +33,7 @@ public class AudioController : MonoBehaviour
    
    private void init()
    {
+        LoadPref?.Invoke();
       _audioSource.volume = DataBetweenScenes.instance.Volume;
       _audioSource.mute = DataBetweenScenes.instance.mute;
    }

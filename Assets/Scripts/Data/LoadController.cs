@@ -10,11 +10,13 @@ public class LoadController : MonoBehaviour
     private void OnEnable()
     {
         Menu.LoadData += Load;
+        AudioController.LoadPref += LoadPref;      
     }
 
     private void OnDisable()
     {
         Menu.LoadData -= Load;
+        AudioController.LoadPref -= LoadPref;
     }
 
     private void Load()
@@ -32,7 +34,23 @@ public class LoadController : MonoBehaviour
         DataBetweenScenes.instance.time = data.time;
         DataBetweenScenes.instance.level = data.level;
         DataBetweenScenes.instance.load=true;
-        
-        Debug.Log(DataBetweenScenes.instance.level);
+        DataBetweenScenes.instance.Volume = data.Volume;
+        DataBetweenScenes.instance.mute = data.mute;        
     }
+
+    private void LoadPref()
+    {
+        if (!File.Exists(filePath)) return;
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(filePath, FileMode.Open);
+
+        data = (GameData)bf.Deserialize(file);
+        file.Close();
+        
+        DataBetweenScenes.instance.Volume = data.Volume;
+        DataBetweenScenes.instance.mute = data.mute;
+    }
+
+
 }

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 7784759350454306600}
   - component: {fileID: 1956807324425844462}
   - component: {fileID: 9101452485617959350}
-  - component: {fileID: 5554906055394499946}
   - component: {fileID: 6369310255436556325}
   - component: {fileID: 2093437746262979471}
   - component: {fileID: 9032478924774477510}
   - component: {fileID: -1495775670057087864}
   - component: {fileID: -1880213376754621719}
+  - component: {fileID: -6632089842418367129}
   m_Layer: 0
   m_Name: EnemyThree
   m_TagString: Untagged
@@ -122,18 +122,6 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   lerpTime: 0.05
   timeToMove: 0.8
---- !u!114 &5554906055394499946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7175673968451551642}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397b973b07307d240b691466db4c71e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &6369310255436556325
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -307,5 +295,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd0d9f7269965724f84e783290424abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6632089842418367129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175673968451551642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca67de9afadd95418cb71136463dd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

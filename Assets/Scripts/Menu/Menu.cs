@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject creditsScreen;
     [SerializeField] private GameObject PlayScreen;
 
-    public static event Action LoadData;
+    public static event Action LoadData;   
 
     private void Start()
     {

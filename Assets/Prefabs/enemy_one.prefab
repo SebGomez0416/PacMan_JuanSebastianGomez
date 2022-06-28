@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 1805779475}
   - component: {fileID: 1778436927}
   - component: {fileID: 1398149720937728882}
-  - component: {fileID: 2425734927879399336}
   - component: {fileID: -7498079161570589024}
   - component: {fileID: -4998681043563881910}
   - component: {fileID: -5167907629128526678}
+  - component: {fileID: 5031040458012169552}
   m_Layer: 0
   m_Name: enemy_one
   m_TagString: Untagged
@@ -169,18 +169,6 @@ MonoBehaviour:
   tilemap: {fileID: 0}
   lerpTime: 0.05
   timeToMove: 0.9
---- !u!114 &2425734927879399336
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5796493538025071444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397b973b07307d240b691466db4c71e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!95 &-7498079161570589024
 Animator:
   serializedVersion: 4
@@ -307,5 +295,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bd0d9f7269965724f84e783290424abc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5031040458012169552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5796493538025071444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ca67de9afadd95418cb71136463dd7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
