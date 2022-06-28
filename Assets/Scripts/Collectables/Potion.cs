@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Potion : MonoBehaviour, ISpawmer,ICollectable 
 {
-    [SerializeField] private SpawnData SpawnData;
-    [SerializeField]private TileMapController tilemap;
+    public TileMapController tilemap { set; private get; }
+    [SerializeField] private SpawnData SpawnData;    
     private Tile currentTile;
     private SpriteRenderer sr;
     private bool isActive;
@@ -28,8 +28,9 @@ public class Potion : MonoBehaviour, ISpawmer,ICollectable
         ActivePowerUp+=SetActive;
     }
 
-    public void Spawn()
+    public void Spawn(TileMapController map)
     {
+        tilemap = map;
         sr.enabled = true;
         tilemap.RandSpawnObject( out currentTile);
         gameObject.transform.position = currentTile.pos;

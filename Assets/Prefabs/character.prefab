@@ -35,7 +35,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2290744065084508348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0199, y: 0.0252, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.81495, y: 0.7244, z: 0.9055}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lerpTime: 0.05
-  tilemap: {fileID: 0}
+  SpawnData: {fileID: 11400000, guid: 18529993a941b1242972fb0e0082a58f, type: 2}
   timeToMove: 0.5
 --- !u!61 &2503220348813571877
 BoxCollider2D:

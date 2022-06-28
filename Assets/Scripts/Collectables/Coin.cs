@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour, ISpawmer,ICollectable
 {
+   public TileMapController tilemap { set; private get; }
    [SerializeField] private SpawnData SpawnData;
-   [SerializeField] int score;
-   [SerializeField]private TileMapController tilemap;
+   [SerializeField] int score;   
    private Tile currentTile;
    private SpriteRenderer sr;
    
@@ -17,8 +17,9 @@ public class Coin : MonoBehaviour, ISpawmer,ICollectable
       sr = GetComponent<SpriteRenderer>();
    }
 
-   public void Spawn()
+   public void Spawn(TileMapController map)
    {
+      tilemap = map;
       sr.enabled = true;
       tilemap.RandSpawnObject( out currentTile);
       gameObject.transform.position = currentTile.pos;

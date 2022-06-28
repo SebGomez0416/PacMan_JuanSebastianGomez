@@ -5,16 +5,19 @@ using System.IO;
 
 public class TileMapController : MonoBehaviour
 {
-    [SerializeField] private int height;
-    [SerializeField] private int width;
-
-    [SerializeField] private string level;
+    private const int height = 32;
+    private const int width = 34;    
     
     [SerializeField] private SpriteRenderer sizeTile;
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private GameObject door;
-    
+    [SerializeField] private LevelData levelData;
+
+    [SerializeField] private GameObject playerPrefab;
+
+
+
     private Tile[,] tilemap;
     private List<Tile> roadMap;
     private Vector3 position;
@@ -24,13 +27,29 @@ public class TileMapController : MonoBehaviour
        tilemap = new Tile[height, width];
        roadMap = new List<Tile>();
        position = sizeTile.transform.position;
-       Spawn();
+       SpawnMap();
        CreateRoadMap();
-    }
-    
-    private void Spawn()
+       SpawnObjects(); 
+      
+    }   
+
+    private void SpawnObjects()
     {
-        FileStream file = File.Open("Assets/Data/"+level+".dat", FileMode.Open);
+        foreach (GameObject obj in levelData.objects)
+        {
+            for (int i = 0; i < obj.GetComponent<ISpawmer>().GetAmount(); i++)
+            {
+                GameObject o = Instantiate(obj, transform);                
+                o.GetComponent<ISpawmer>().Spawn(this);
+            }
+        }
+    }
+
+
+
+    private void SpawnMap()
+    {
+        FileStream file = File.Open("Assets/Data/"+levelData.Level+".dat", FileMode.Open);
         BinaryReader br = new BinaryReader(file);
         
         for (int i = 0; i < height; i++)

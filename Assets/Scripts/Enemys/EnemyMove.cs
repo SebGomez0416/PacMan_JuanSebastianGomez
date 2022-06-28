@@ -3,8 +3,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyMove : MonoBehaviour,ISpawmer
 {
-    [SerializeField] private SpawnData SpawnData;
-    [SerializeField]private TileMapController tilemap;
+    public TileMapController tilemap { set; private get; }
+    [SerializeField] private SpawnData SpawnData;   
     [SerializeField] private float lerpTime;
     private Tile currentTile;
     private bool gameOver;
@@ -36,8 +36,9 @@ public class EnemyMove : MonoBehaviour,ISpawmer
         gameOver = !gameOver;
     }
 
-    public void Spawn()
+    public void Spawn(TileMapController map)
     {
+        tilemap = map;
         gameObject.SetActive(true);
         _direction = (Direction.Dir)Random.Range(0, 4);
         tilemap.RandSpawnCharacters( out currentTile);

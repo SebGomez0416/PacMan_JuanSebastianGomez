@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MyCamera : MonoBehaviour
 {
-   [SerializeField] private GameObject target;
+   private GameObject target;
    private SpriteRenderer sr;
    private Camera cam;
    private Vector3 size;
@@ -18,8 +18,9 @@ public class MyCamera : MonoBehaviour
    [SerializeField] private float maxY;
    [SerializeField] private float lerpTime;
 
-   private void Awake()
+   private void Start()
    {
+      target = GameObject.FindGameObjectWithTag("Character");
       sr = target.GetComponent<SpriteRenderer>();
       cam= Camera.main;
       movement = transform.position;
