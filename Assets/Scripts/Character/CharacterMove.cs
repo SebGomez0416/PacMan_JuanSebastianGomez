@@ -57,7 +57,6 @@ public class CharacterMove : MonoBehaviour
 
     private void ResetPosition()
     {   
-        Debug.Log("entras aca");
         sr.enabled = false;
         rb.position = initPos;
         isMove = true;

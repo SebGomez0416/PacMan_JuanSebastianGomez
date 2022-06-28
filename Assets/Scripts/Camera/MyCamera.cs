@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class MyCamera : MonoBehaviour
@@ -9,6 +10,7 @@ public class MyCamera : MonoBehaviour
    private Vector3 max;
    private Vector3 min;
    private Vector3 movement;
+   private Vector3 initPos;
    [SerializeField] private float moveDistance;
    [SerializeField] private float minX;
    [SerializeField] private float maxX;
@@ -21,6 +23,17 @@ public class MyCamera : MonoBehaviour
       sr = target.GetComponent<SpriteRenderer>();
       cam= Camera.main;
       movement = transform.position;
+      initPos = transform.position;
+   }
+
+   private void OnEnable()
+   {
+      CharacterDeath.NotifyDeath += ResetPosition;
+   }
+
+   private void OnDisable()
+   {
+      CharacterDeath.NotifyDeath -= ResetPosition;
    }
 
    private void LateUpdate()
@@ -83,5 +96,10 @@ public class MyCamera : MonoBehaviour
             movement.x = Mathf.Clamp(transform.position.x+moveDistance, minX, maxX);
             break;
       }
+   }
+
+   private void ResetPosition()
+   {
+      movement = initPos;
    }
 }
