@@ -3,23 +3,16 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour, ISpawmer,ICollectable
 {
+   private TileMapController tilemap;
    [SerializeField] private SpawnData SpawnData;
-   [SerializeField] int score;
-   [SerializeField]private TileMapController tilemap;
+   [SerializeField] int score;   
    private Tile currentTile;
-   private SpriteRenderer sr;
-   
+
    public static event Action <int> SendScore;
-   public static event Action Collected;
 
-   private void Awake()
+   public void Spawn(TileMapController map)
    {
-      sr = GetComponent<SpriteRenderer>();
-   }
-
-   public void Spawn()
-   {
-      sr.enabled = true;
+      tilemap = map;
       tilemap.RandSpawnObject( out currentTile);
       gameObject.transform.position = currentTile.pos;
    }
@@ -32,7 +25,6 @@ public class Coin : MonoBehaviour, ISpawmer,ICollectable
    public void GetObject()
    {
       SendScore?.Invoke(score);
-      Collected?.Invoke();
-      gameObject.SetActive(false);
+      Destroy(this.gameObject);
    }
 }

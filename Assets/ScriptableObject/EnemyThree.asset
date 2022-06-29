@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44a41ad0632bd4d4d957fc27da475ae7, type: 3}
   m_Name: EnemyThree
   m_EditorClassIdentifier: 
-  amount: 15
+  amount: 25

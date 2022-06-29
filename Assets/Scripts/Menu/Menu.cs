@@ -7,7 +7,9 @@ public class Menu : MonoBehaviour
     [SerializeField] private GameObject creditsScreen;
     [SerializeField] private GameObject PlayScreen;
 
-    public static event Action LoadData;   
+    public static event Action LoadData; 
+    public static event Action SavePref;
+    
 
     private void Start()
     {
@@ -16,19 +18,20 @@ public class Menu : MonoBehaviour
 
     public void PlayButton()
     {
+        SavePref?.Invoke();
         PlayScreen.SetActive(true);
     }
     
     public void NewGameButton()
     {
-        SceneManager.LoadScene(DataBetweenScenes.instance.level);
+        SceneManager.LoadScene("GamePlay");
     }
 
     public void ContinueButton()
     {
         LoadData?.Invoke();
         if (!DataBetweenScenes.instance.load) return;
-        SceneManager.LoadScene(DataBetweenScenes.instance.level);
+        SceneManager.LoadScene("GamePlay");
     }
 
     public void CreditsButton(bool set)

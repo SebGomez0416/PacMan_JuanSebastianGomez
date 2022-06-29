@@ -1,20 +1,14 @@
 using System;
 using UnityEngine;
 
-public class Potion : MonoBehaviour, ISpawmer,ICollectable 
+public class Potion : MonoBehaviour, ISpawmer,ICollectable
 {
-    [SerializeField] private SpawnData SpawnData;
-    [SerializeField]private TileMapController tilemap;
+    private TileMapController tilemap;
+    [SerializeField] private SpawnData SpawnData;    
     private Tile currentTile;
-    private SpriteRenderer sr;
     private bool isActive;
 
     public static event Action ActivePowerUp;
-
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-    }
 
     private void OnEnable()
     {
@@ -28,9 +22,9 @@ public class Potion : MonoBehaviour, ISpawmer,ICollectable
         ActivePowerUp+=SetActive;
     }
 
-    public void Spawn()
+    public void Spawn(TileMapController map)
     {
-        sr.enabled = true;
+        tilemap = map;
         tilemap.RandSpawnObject( out currentTile);
         gameObject.transform.position = currentTile.pos;
     }
@@ -44,7 +38,7 @@ public class Potion : MonoBehaviour, ISpawmer,ICollectable
     {
         if (isActive) return;
         ActivePowerUp?.Invoke();
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     private void SetActive()

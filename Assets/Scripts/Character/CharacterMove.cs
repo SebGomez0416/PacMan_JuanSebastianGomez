@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class CharacterMove : MonoBehaviour
+public class CharacterMove : MonoBehaviour,ISpawmer
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
 
     [SerializeField] private float lerpTime;
-    [SerializeField]private TileMapController tilemap;
+    private TileMapController tilemap;
+    [SerializeField] private SpawnData SpawnData;
     [SerializeField] private float timeToMove;
     private Tile currentTile;
     private bool gameOver;
@@ -14,35 +15,37 @@ public class CharacterMove : MonoBehaviour
     private Vector2 initPos;
     private float time;
 
-    private void Awake()
+    public void Spawn(TileMapController map)
     {
+        tilemap = map;
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         initPos = rb.position;
-    }
-
-    private void Start()
-    {
         sr.enabled = true;
-        tilemap.SpawnPoint( out currentTile);
+        tilemap.SpawnPoint(out currentTile);
         rb.position = currentTile.pos;
     }
     
+    public int GetAmount()
+    {
+        return SpawnData.Amount;
+    }
+
     private void OnEnable()
     {
         CharacterDeath.NotifyDeath += ResetPosition;
-        CharacterDeath.NotifyDeath += Spawn;       
+        CharacterDeath.NotifyDeath += SpawnCharacter;
         UI.SendGameOver += SetGameOver;
     }
 
     private void OnDisable()
     {
         CharacterDeath.NotifyDeath -= ResetPosition;
-        CharacterDeath.NotifyDeath -= Spawn;
+        CharacterDeath.NotifyDeath -= SpawnCharacter;
         UI.SendGameOver -= SetGameOver;
     }
 
-    private void Spawn()
+    private void SpawnCharacter()
     { 
         Invoke("ReSpawn",2);
     }

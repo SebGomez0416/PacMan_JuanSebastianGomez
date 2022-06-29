@@ -8,11 +8,12 @@ public class AudioController : MonoBehaviour
     [SerializeField] private List<AudioClip> audioClips;
 
     public static event Action LoadPref;
-
+    
     private void Awake()
    {
       _audioSource = GetComponent<AudioSource>();
    }
+    
    private void OnEnable()
    {
       UIAudioSettings.MuteAudio += Mute;
@@ -20,6 +21,7 @@ public class AudioController : MonoBehaviour
       UIAudioSettings.InitAudio += init;
       Lives.PlaySound += ChangeAudioClip;
       Score.PlaySound += ChangeAudioClip;
+      TileMapController.SendAudioClip += ChangeAudioClip;
    }
 
    private void OnDisable()
@@ -29,6 +31,7 @@ public class AudioController : MonoBehaviour
       UIAudioSettings.InitAudio -= init;
       Lives.PlaySound -= ChangeAudioClip;
       Score.PlaySound -= ChangeAudioClip;
+      TileMapController.SendAudioClip -= ChangeAudioClip;
    }
    
    private void init()
@@ -38,7 +41,7 @@ public class AudioController : MonoBehaviour
       _audioSource.mute = DataBetweenScenes.instance.mute;
    }
 
-   private void ChangeAudioClip(string name)
+   private void ChangeAudioClip(string name ,bool loop)
    {
       foreach (var clip in audioClips)
       {
@@ -46,7 +49,7 @@ public class AudioController : MonoBehaviour
             _audioSource.clip = clip;
       }
 
-      _audioSource.loop = false;
+      _audioSource.loop = loop;
       _audioSource.Play();
    }
 

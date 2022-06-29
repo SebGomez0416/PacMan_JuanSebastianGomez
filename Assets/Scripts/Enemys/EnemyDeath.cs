@@ -24,7 +24,7 @@ public class EnemyDeath : MonoBehaviour, IKillable
     {
         if (!powerUp) return;
         NotifyDeath?.Invoke();
-        gameObject.SetActive(false);
+        Destroy(this.gameObject);
     }
 
     private void SetActive()
