@@ -18,12 +18,12 @@ public class Menu : MonoBehaviour
 
     public void PlayButton()
     {
-        SavePref?.Invoke();
-        PlayScreen.SetActive(true);
+       PlayScreen.SetActive(true);
     }
     
     public void NewGameButton()
-    {
+    { 
+        SavePref?.Invoke();
         SceneManager.LoadScene("GamePlay");
     }
 

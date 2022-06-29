@@ -74,7 +74,7 @@ public class TileMapController : MonoBehaviour
 
     private void SpawnMap()
     {
-        FileStream file = File.Open("Assets/Data/"+levelData[DataBetweenScenes.instance.level].Level+".dat", FileMode.Open);
+        FileStream file = File.Open(Application.dataPath + "/StreamingAssets/Data/"+levelData[DataBetweenScenes.instance.level].Level+".dat", FileMode.Open);
         BinaryReader br = new BinaryReader(file);
         
         for (int i = 0; i < height; i++)

@@ -5,7 +5,6 @@ using System.IO;
 public class LoadController : MonoBehaviour
 {
     private GameData data;
-    private string filePath = "Assets/Data/gameData.dat";
 
     private void OnEnable()
     {
@@ -21,6 +20,7 @@ public class LoadController : MonoBehaviour
 
     private void Load()
     {
+        string filePath = Application.persistentDataPath + "/gameData.dat";
         if (!File.Exists(filePath)) return;
       
         BinaryFormatter bf = new BinaryFormatter();
@@ -35,11 +35,12 @@ public class LoadController : MonoBehaviour
         DataBetweenScenes.instance.level = data.level;
         DataBetweenScenes.instance.load=true;
         DataBetweenScenes.instance.Volume = data.Volume;
-        DataBetweenScenes.instance.mute = data.mute;        
+        DataBetweenScenes.instance.mute = data.mute;
     }
 
     private void LoadPref()
     {
+        string filePath = Application.persistentDataPath + "/gameData.dat";
         if (!File.Exists(filePath)) return;
 
         BinaryFormatter bf = new BinaryFormatter();
