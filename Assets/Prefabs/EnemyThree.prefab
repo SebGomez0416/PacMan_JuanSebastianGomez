@@ -18,13 +18,14 @@ GameObject:
   - component: {fileID: -1495775670057087864}
   - component: {fileID: -1880213376754621719}
   - component: {fileID: -6632089842418367129}
+  - component: {fileID: -8870417459281917125}
   m_Layer: 0
   m_Name: EnemyThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &237320284770456156
 Transform:
   m_ObjectHideFlags: 0
@@ -119,7 +120,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnData: {fileID: 11400000, guid: c9fca200ac40f4f498b51d2fee838b77, type: 2}
-  tilemap: {fileID: 0}
   lerpTime: 0.05
   timeToMove: 0.8
 --- !u!61 &6369310255436556325
@@ -201,7 +201,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 407b4a0e7db055a43963c06bb6d5cf8e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -307,5 +307,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ca67de9afadd95418cb71136463dd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8870417459281917125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7175673968451551642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c5284c3d35efd14fa7c07400a1e721c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

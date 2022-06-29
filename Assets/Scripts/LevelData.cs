@@ -5,7 +5,13 @@ using System.Collections.Generic;
 public class LevelData : ScriptableObject
 {
     [SerializeField] private string level;    
-     public List<GameObject> objects;
+    public List<GameObject> objects;
+    [SerializeField] private AudioClip levelAudio;
+
+    public AudioClip LevelAudio
+    {
+        get { return levelAudio; }
+    }
 
     public string Level
     {

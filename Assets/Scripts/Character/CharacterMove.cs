@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterMove : MonoBehaviour, ISpawmer
+public class CharacterMove : MonoBehaviour,ISpawmer
 {
     private Rigidbody2D rb;
     private SpriteRenderer sr;
@@ -25,17 +25,16 @@ public class CharacterMove : MonoBehaviour, ISpawmer
         tilemap.SpawnPoint(out currentTile);
         rb.position = currentTile.pos;
     }
-
+    
     public int GetAmount()
     {
         return SpawnData.Amount;
     }
 
-
     private void OnEnable()
     {
         CharacterDeath.NotifyDeath += ResetPosition;
-        CharacterDeath.NotifyDeath += SpawnCharacter;       
+        CharacterDeath.NotifyDeath += SpawnCharacter;
         UI.SendGameOver += SetGameOver;
     }
 

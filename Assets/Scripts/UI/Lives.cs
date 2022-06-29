@@ -9,7 +9,7 @@ public class Lives : MonoBehaviour
     
     private GameObject[] lives;
     public static event Action GameOver;
-    public static event Action <string> PlaySound;
+    public static event Action <string, bool> PlaySound;
     
     private void Start()
     {
@@ -43,7 +43,7 @@ public class Lives : MonoBehaviour
         if (DataBetweenScenes.instance.lives == 0)
         {
             GameOver?.Invoke();
-            PlaySound?.Invoke(gameOver.name);
+            PlaySound?.Invoke(gameOver.name, false);
         }
            
     }

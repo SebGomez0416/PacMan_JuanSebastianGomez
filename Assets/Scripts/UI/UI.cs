@@ -11,6 +11,10 @@ public class UI : MonoBehaviour
     private bool isPause;
     private bool isActiveSettings;
     public static event Action SendGameOver;
+    public static event Action DestroyLevel;
+    public static event Action GenerateLevel;
+    public static event Action InitTime;
+    public static event Action SaveData;
     
 
     private void OnEnable()
@@ -60,17 +64,23 @@ public class UI : MonoBehaviour
     
     public void MenuButton()
     {
+        SaveData?.Invoke();
         SceneManager.LoadScene("Menu");
     }
     
     public void ChangeLevel()
     {
         DataBetweenScenes.instance.level++; 
-        SceneManager.LoadScene(DataBetweenScenes.instance.level);
+        DestroyLevel?.Invoke();
+        SaveData?.Invoke();
+        winScreen.SetActive(false);
+        GenerateLevel?.Invoke();
+        InitTime?.Invoke();
     }
 
     public void ButtonExit()
     {
+        SaveData?.Invoke();
         Application.Quit();
     }
 }

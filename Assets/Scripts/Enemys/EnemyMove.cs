@@ -3,7 +3,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyMove : MonoBehaviour,ISpawmer
 {
-    public TileMapController tilemap { set; private get; }
+    private TileMapController tilemap;
     [SerializeField] private SpawnData SpawnData;   
     [SerializeField] private float lerpTime;
     private Tile currentTile;
@@ -39,7 +39,6 @@ public class EnemyMove : MonoBehaviour,ISpawmer
     public void Spawn(TileMapController map)
     {
         tilemap = map;
-        gameObject.SetActive(true);
         _direction = (Direction.Dir)Random.Range(0, 4);
         tilemap.RandSpawnCharacters( out currentTile);
         rb.position = currentTile.pos;        

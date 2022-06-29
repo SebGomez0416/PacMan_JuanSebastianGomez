@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -12,16 +13,15 @@ public class TileMapController : MonoBehaviour
     [SerializeField] private GameObject wallPrefab;
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private GameObject door;
-    [SerializeField] private LevelData levelData;
-
-    [SerializeField] private GameObject playerPrefab;
-
-
+    [SerializeField] private LevelData[] levelData ;
+    [SerializeField] private MyCamera camera;
 
     private Tile[,] tilemap;
     private List<Tile> roadMap;
     private Vector3 position;
 
+    public static event Action <string, bool> SendAudioClip;
+    
     private void Awake()
     {
        tilemap = new Tile[height, width];
@@ -29,27 +29,52 @@ public class TileMapController : MonoBehaviour
        position = sizeTile.transform.position;
        SpawnMap();
        CreateRoadMap();
-       SpawnObjects(); 
-      
-    }   
+       SpawnObjects();
+    }
+    
+    private void Start()
+    {
+        SendAudioClip?.Invoke(levelData[DataBetweenScenes.instance.level].LevelAudio.name, true);
+    }
+
+    private void OnEnable()
+    {
+        UI.GenerateLevel += Generate;
+    }
+
+    private void OnDisable()
+    {
+        UI.GenerateLevel += Generate;
+    }
+
+    private void Generate()
+    {
+        tilemap = new Tile[height, width];
+        roadMap = new List<Tile>();
+        position = sizeTile.transform.position;
+        SpawnMap();
+        CreateRoadMap();
+        SpawnObjects();
+        SendAudioClip?.Invoke(levelData[DataBetweenScenes.instance.level].LevelAudio.name, true);
+    }
 
     private void SpawnObjects()
     {
-        foreach (GameObject obj in levelData.objects)
+        foreach (GameObject obj in levelData[DataBetweenScenes.instance.level].objects)
         {
             for (int i = 0; i < obj.GetComponent<ISpawmer>().GetAmount(); i++)
             {
                 GameObject o = Instantiate(obj, transform);                
                 o.GetComponent<ISpawmer>().Spawn(this);
+                
+                if (o.name == "character(Clone)") camera.init(o);
             }
         }
     }
 
-
-
     private void SpawnMap()
     {
-        FileStream file = File.Open("Assets/Data/"+levelData.Level+".dat", FileMode.Open);
+        FileStream file = File.Open("Assets/Data/"+levelData[DataBetweenScenes.instance.level].Level+".dat", FileMode.Open);
         BinaryReader br = new BinaryReader(file);
         
         for (int i = 0; i < height; i++)
@@ -97,6 +122,7 @@ public class TileMapController : MonoBehaviour
             }
         }
     }
+    
 
     public bool CheckMove( ref Tile t, Direction.Dir direction)
     {

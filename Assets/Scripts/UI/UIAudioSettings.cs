@@ -15,7 +15,7 @@ public class UIAudioSettings : MonoBehaviour
 
     private void Start()
     {
-        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("menu") ) DataBetweenScenes.instance.AudioInit();
+        if(SceneManager.GetActiveScene() == SceneManager.GetSceneByName("Menu") ) DataBetweenScenes.instance.AudioInit();
         InitAudio?.Invoke();
         slider.value=DataBetweenScenes.instance.Volume;        
     }

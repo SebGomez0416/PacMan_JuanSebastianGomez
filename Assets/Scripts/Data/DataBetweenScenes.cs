@@ -32,7 +32,8 @@ public class DataBetweenScenes : MonoBehaviour
     {
         ScoreCoins = 0;
         lives = 5;
-        level = 1;
+        level = 0;
+        time = 0;
     }
 
     public void AudioInit()

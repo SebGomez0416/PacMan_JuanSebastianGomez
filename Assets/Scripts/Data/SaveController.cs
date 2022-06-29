@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -7,6 +8,19 @@ public class SaveController : MonoBehaviour
    private GameData data;
    private string filePath = "Assets/Data/gameData.dat";
 
+
+   private void OnEnable()
+   {
+      UI.SaveData += Save;
+      Menu.SavePref += Save;
+   }
+
+   private void OnDisable()
+   {
+      UI.SaveData -= Save;
+      Menu.SavePref -= Save;
+   }
+   
    private void Save()
    {
       BinaryFormatter bf = new BinaryFormatter();
@@ -22,10 +36,5 @@ public class SaveController : MonoBehaviour
       data.mute = DataBetweenScenes.instance.mute;   
 
       bf.Serialize(file, data);
-   }
-
-   private void OnDestroy()
-   {
-      Save();
    }
 }
