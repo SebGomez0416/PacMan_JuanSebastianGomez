@@ -18,6 +18,13 @@ public class CharacterMove : MonoBehaviour,ISpawmer
     
     public static event Action <GameObject> SendCharacter;
 
+   
+    private void Start()
+    {
+        Debug.Log("entro al start");
+        SendCharacter?.Invoke(this.gameObject);
+    }
+
     public void Spawn(TileMapController map)
     {
         tilemap = map;
@@ -26,8 +33,7 @@ public class CharacterMove : MonoBehaviour,ISpawmer
         initPos = rb.position;
         sr.enabled = true;
         tilemap.SpawnPoint(out currentTile);
-        rb.position = currentTile.pos;
-        SendCharacter?.Invoke(this.gameObject);
+        rb.position = currentTile.pos;       
     }
     
     public int GetAmount()

@@ -17,18 +17,10 @@ public class MyCamera : MonoBehaviour
    [SerializeField] private float minY;
    [SerializeField] private float maxY;
    [SerializeField] private float lerpTime;
-
-   private void init(GameObject _target)
-   {
-      target = _target;
-      sr = target.GetComponent<SpriteRenderer>();
-      cam= Camera.main;
-      movement = transform.position;
-      initPos = transform.position;
-   }
-   
+      
    private void OnEnable()
    {
+        Debug.Log("entro al onenable");
       CharacterDeath.NotifyDeath += ResetPosition;
       CharacterMove.SendCharacter += init;
    }
@@ -37,11 +29,22 @@ public class MyCamera : MonoBehaviour
    {
       CharacterDeath.NotifyDeath -= ResetPosition;
       CharacterMove.SendCharacter -= init;
-   }
-   
-   private void LateUpdate()
+   }    
+
+    private void init(GameObject _target)
+    {
+        Debug.Log("entro al init");
+        target = _target;
+        sr = target.GetComponent<SpriteRenderer>();
+        cam = Camera.main;
+        movement = transform.position;
+        initPos = transform.position;
+    }
+
+    private void LateUpdate()
    {
-      Vector2 cameraMovement = target.transform.position;
+        Debug.Log("entro al late");
+        Vector2 cameraMovement = target.transform.position;
       
       max=cam.ScreenToWorldPoint(Vector3.zero);
       min= cam.ScreenToWorldPoint(new Vector3(Screen.width,Screen.height,0));
