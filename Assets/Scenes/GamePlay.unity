@@ -491,7 +491,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 836807236, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
       propertyPath: scoreToWin
-      value: 5
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 836807236, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
       propertyPath: nextLevelButton
@@ -623,7 +623,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6481918636352608432, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
       propertyPath: m_text
-      value: 0
+      value: '0
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 6481918636352608432, guid: 674f05d1c155d7c4881a063feaf9040b, type: 3}
       propertyPath: m_fontSize

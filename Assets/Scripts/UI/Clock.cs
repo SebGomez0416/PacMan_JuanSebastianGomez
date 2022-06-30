@@ -9,7 +9,7 @@ public class Clock : MonoBehaviour
     
     private bool timerBool;
     private float currentTime;
-    private TimeSpan timer;
+    private TimeSpan timer
 
     private void Start()
     {
