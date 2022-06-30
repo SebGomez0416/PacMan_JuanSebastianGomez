@@ -10,7 +10,7 @@ public class MyCamera : MonoBehaviour
    private Vector3 min;
    private Vector3 movement;
    private Vector3 initPos;
-
+   
    [SerializeField] private float moveDistance;
    [SerializeField] private float minX;
    [SerializeField] private float maxX;
@@ -18,7 +18,7 @@ public class MyCamera : MonoBehaviour
    [SerializeField] private float maxY;
    [SerializeField] private float lerpTime;
 
-   public void init(GameObject _target)
+   private void init(GameObject _target)
    {
       target = _target;
       sr = target.GetComponent<SpriteRenderer>();
@@ -30,11 +30,13 @@ public class MyCamera : MonoBehaviour
    private void OnEnable()
    {
       CharacterDeath.NotifyDeath += ResetPosition;
+      CharacterMove.SendCharacter += init;
    }
 
    private void OnDisable()
    {
       CharacterDeath.NotifyDeath -= ResetPosition;
+      CharacterMove.SendCharacter -= init;
    }
    
    private void LateUpdate()

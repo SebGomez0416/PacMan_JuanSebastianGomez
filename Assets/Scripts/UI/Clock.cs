@@ -21,13 +21,11 @@ public class Clock : MonoBehaviour
     private void OnEnable()
     {
         UI.SendGameOver += EndTime;
-        UI.InitTime += EndTime;
     }
 
     private void OnDisable()
     {
         UI.SendGameOver -= EndTime;
-        UI.InitTime -= EndTime;
     }
 
     private void EndTime()

@@ -14,14 +14,13 @@ public class TileMapController : MonoBehaviour
     [SerializeField] private GameObject groundPrefab;
     [SerializeField] private GameObject door;
     [SerializeField] private LevelData[] levelData ;
-    [SerializeField] private MyCamera camera;
 
     private Tile[,] tilemap;
     private List<Tile> roadMap;
     private Vector3 position;
 
     public static event Action <string, bool> SendAudioClip;
-    
+
     private void Awake()
     {
        tilemap = new Tile[height, width];
@@ -36,28 +35,7 @@ public class TileMapController : MonoBehaviour
     {
         SendAudioClip?.Invoke(levelData[DataBetweenScenes.instance.level].LevelAudio.name, true);
     }
-
-    private void OnEnable()
-    {
-        UI.GenerateLevel += Generate;
-    }
-
-    private void OnDisable()
-    {
-        UI.GenerateLevel += Generate;
-    }
-
-    private void Generate()
-    {
-        tilemap = new Tile[height, width];
-        roadMap = new List<Tile>();
-        position = sizeTile.transform.position;
-        SpawnMap();
-        CreateRoadMap();
-        SpawnObjects();
-        SendAudioClip?.Invoke(levelData[DataBetweenScenes.instance.level].LevelAudio.name, true);
-    }
-
+    
     private void SpawnObjects()
     {
         foreach (GameObject obj in levelData[DataBetweenScenes.instance.level].objects)
@@ -66,8 +44,6 @@ public class TileMapController : MonoBehaviour
             {
                 GameObject o = Instantiate(obj, transform);                
                 o.GetComponent<ISpawmer>().Spawn(this);
-                
-                if (o.name == "character(Clone)") camera.init(o);
             }
         }
     }

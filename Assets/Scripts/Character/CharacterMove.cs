@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class CharacterMove : MonoBehaviour,ISpawmer
@@ -14,6 +15,8 @@ public class CharacterMove : MonoBehaviour,ISpawmer
     private bool isMove;
     private Vector2 initPos;
     private float time;
+    
+    public static event Action <GameObject> SendCharacter;
 
     public void Spawn(TileMapController map)
     {
@@ -24,6 +27,7 @@ public class CharacterMove : MonoBehaviour,ISpawmer
         sr.enabled = true;
         tilemap.SpawnPoint(out currentTile);
         rb.position = currentTile.pos;
+        SendCharacter?.Invoke(this.gameObject);
     }
     
     public int GetAmount()

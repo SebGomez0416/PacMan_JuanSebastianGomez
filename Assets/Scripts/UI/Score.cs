@@ -23,13 +23,13 @@ public class Score : MonoBehaviour
     private void OnEnable()
     {
         Coin.SendScore += UpdateScore;
-        UI.DestroyLevel += ResetScore;
+        UI.ChangeLv += ResetScore;
     }
 
     private void OnDisable()
     {
         Coin.SendScore -= UpdateScore;
-        UI.DestroyLevel -= ResetScore;
+        UI.ChangeLv -= ResetScore;
     }
 
     private void ResetScore()
