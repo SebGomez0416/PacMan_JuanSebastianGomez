@@ -1,15 +1,22 @@
 Developed by
 Juan Sebastian Gomez
 
-
 Art
-
 Dungeon Tileset
 0x72.itch.io/dungeontileset-ii
 
 Gui Elements
 Mounir Tohami
 mounirtohami.itch.io/pixel-art-gui-elements
+
+SFX
+Svl
+https://svl.itch.io/rpg-music-pack-svl
+
+JDWasabi
+https://jdwasabi.itch.io/8-bit-16-bit-sound-effects-pack
+
+
 
 
 
